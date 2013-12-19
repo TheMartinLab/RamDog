@@ -1,0 +1,10 @@
+synchrotron	bnl
+date	2005
+calibrant	none
+notes	test
+x	800.0
+y	787.0
+distance	100.0
+wavelength	0.922
+backgroundScale	0.0
+pixel_size	100

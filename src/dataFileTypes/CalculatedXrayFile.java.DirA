@@ -1,0 +1,250 @@
+package dataFileTypes;
+
+import geometry.JVector;
+import io.MyFileInputStream;
+
+import java.awt.Point;
+import java.io.File;
+import java.util.Scanner;
+import java.util.Vector;
+
+public class CalculatedXrayFile {
+
+	private String commentLineStartsWith = "#";
+	private String JVectorToStringSeparation = ",";
+	private File file;
+	private double[][] columnarData, matrixData;
+	private double qMaxX, qMaxY, qStep;
+	private int minX, minY, maxX, maxY;
+	private Vector<JVector[]> projections;
+	
+	public CalculatedXrayFile(File file) {
+		this.file = file;
+		projections = new Vector<JVector[]>();
+	}
+
+	/* ************ */
+	/* INPUT/OUTPUT */
+	/* ************ */
+	private String setAxes(Scanner s) {
+		//String line = s.nextLine();
+		String line;
+		String[] vals;
+		Scanner lineScanner;
+		Vector<JVector> aProjection = new Vector<JVector>();
+		do {
+			line = s.nextLine();
+			lineScanner = new Scanner(line);
+			while(lineScanner.hasNext()) {
+				vals = lineScanner.next().split(JVectorToStringSeparation);
+				if(vals.length == 3) {
+					aProjection.add(new JVector(Double.valueOf(vals[0]), Double.valueOf(vals[1]),
+							Double.valueOf(vals[2])));
+				}
+				if(aProjection.size() == 3) {
+					projections.add((JVector[]) aProjection.toArray(new JVector[aProjection.size()]));
+					aProjection.clear();
+				}
+			}
+			lineScanner.close();
+		} while(!line.contains("Maximum q values"));
+
+		return line;
+	}
+	private void setMaxQVals(String line) {
+		Scanner s = new Scanner(line);
+		for(int i = 0; i < 6; i++)
+			s.next();
+////		while(s.hasNext())
+		qMaxX = s.nextDouble();
+		qMaxY = s.nextDouble();
+		s.close();
+	}
+	private void setDeltaQ(String line) {
+		Scanner s = new Scanner(line);
+		for(int i = 0; i < 3; i++)
+			s.next();
+//		while(s.hasNext())
+		qStep = s.nextDouble();
+		s.close();
+	}
+	private void read_xyI_column(Scanner s) {
+		Vector<double[]> lines = new Vector<double[]>(5000);
+		double x, y, I;
+		do {
+			String[] line = s.nextLine().split("\t");
+			if(line.length > 1) 
+				try {
+					x = Double.valueOf(line[0]);
+					y = Double.valueOf(line[1]);
+					I = Double.valueOf(line[2]);
+					lines.add(new double[] {x, y, I});
+				} catch(NumberFormatException nfe) {
+					//nfe.printStackTrace();
+				}
+		} while(s.hasNextLine());
+		
+		columnarData = new double[lines.size()][3];
+		columnarData = lines.toArray(columnarData);
+	}
+	public void read() {
+		MyFileInputStream mfis = new MyFileInputStream(file);
+		Scanner s = mfis.getScanner();
+		
+		String line;
+		do {
+			line = s.nextLine();
+			if(line.contains("Diffraction axes")) {
+				line = setAxes(s);
+				setMaxQVals(line);
+				setDeltaQ(s.nextLine()); 
+			}
+		} while(s.hasNextLine() && line.substring(0, 1).compareTo(commentLineStartsWith) == 0);
+		
+		if(line.contains("xyI_column"))
+			read_xyI_column(s);
+		
+		mfis.close();
+	}
+	/* ***************** */
+	/* DATA MANIPULATION */
+	/* ***************** */
+	private void columnarToMatrix() {
+		if(columnarData == null)
+			read();
+		
+		minX = (int) columnarData[0][0];
+		minY = (int) columnarData[0][1];
+		maxX = -1 * minX;
+		maxY = -1 * minY;
+		
+		int numX2 = (int) Math.rint(2*(qMaxX/qStep))+1;
+		int numY2 = (int) Math.rint(2*(qMaxY/qStep))+1;
+		int numX = maxX - minX+1;
+		int numY = maxY - minY+1;
+		
+		matrixData = new double[numX][numY];
+		int a;
+		int b;
+		for(int i = 0; i < columnarData.length; i++) {
+			try {
+				a = (int) (columnarData[i][0] - minX);
+				b = (int) (columnarData[i][1] - minY);
+				//System.out.println("a b: " + a + " " + b);
+				matrixData[a][b] = columnarData[i][2];
+			} catch(ArrayIndexOutOfBoundsException e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	public JVector pointToHKL(Point p) {
+		double x = p.x * qStep - qMaxX;
+		double y = p.y * qStep - qMaxY;
+		
+		return JVector.add(JVector.multiply(projections.get(0)[0], x),
+				JVector.multiply(projections.get(0)[1], y));
+		
+	}
+	/* ******************* */
+	/* GETTERS AND SETTERS */
+	/* ******************* */
+	public File getFile() {
+		return file;
+	}
+
+	public void setFile(File file) {
+		this.file = file;
+	}
+
+	public double[][] getColumnarData() {
+		if(columnarData == null)
+			read();
+		return columnarData;
+	}
+
+	public void setColumnarData(double[][] data) {
+		this.columnarData = data;
+	}
+
+	public double getqMaxX() {
+		return qMaxX;
+	}
+
+	public void setqMaxX(double qMaxX) {
+		this.qMaxX = qMaxX;
+	}
+
+	public double getqMaxY() {
+		return qMaxY;
+	}
+
+	public void setqMaxY(double qMaxY) {
+		this.qMaxY = qMaxY;
+	}
+
+	public double getqStep() {
+		return qStep;
+	}
+
+	public void setqStep(double qStep) {
+		this.qStep = qStep;
+	}
+
+	public Vector<JVector[]> getProjections() {
+		return projections;
+	}
+
+	public void setProjections(Vector<JVector[]> projections) {
+		this.projections = projections;
+	}
+
+	public double[][] getMatrixData() {
+		if(matrixData == null)
+			columnarToMatrix();
+		return matrixData;
+	}
+
+	public void setMatrixData(double[][] matrixData) {
+		this.matrixData = matrixData;
+	}
+
+	public int getMinX() {
+		if(matrixData == null)
+			columnarToMatrix();
+		return minX;
+	}
+
+	public void setMinX(int minX) {
+		this.minX = minX;
+	}
+
+	public int getMinY() {
+		if(matrixData == null)
+			columnarToMatrix();
+		return minY;
+	}
+
+	public void setMinY(int minY) {
+		this.minY = minY;
+	}
+
+	public int getMaxX() {
+		if(matrixData == null)
+			columnarToMatrix();
+		return maxX;
+	}
+
+	public void setMaxX(int maxX) {
+		this.maxX = maxX;
+	}
+
+	public int getMaxY() {
+		if(matrixData == null)
+			columnarToMatrix();
+		return maxY;
+	}
+
+	public void setMaxY(int maxY) {
+		this.maxY = maxY;
+	}
+}
