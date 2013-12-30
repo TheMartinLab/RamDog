@@ -131,21 +131,15 @@ public class FileIO {
 	}
 	public static synchronized void writeToFileXYI(Pixel[] pix, File write) {
 		System.out.println("Writing a 1d pixel array to: " + write);
-		FileOutputStream fos = null;
-		try {
-			fos = new FileOutputStream(write);
-		} catch (FileNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		PrintStream ps = new PrintStream(fos);
-		ps.println(Pixel.getHeader());
+
+		MyPrintStream mps = new MyPrintStream(write);
+		mps.println(Pixel.getHeader());
 		// TODO set the phi value in each pixel before printing out. Ideally this should be done when the path is created...
+		mps.println("x\ty\tI");
 		for(Pixel pixel : pix)
-			ps.println(pixel);
+			mps.println(pixel);
 		
-		close(ps);
-		close(fos);
+		mps.close();
 	}
 	public static synchronized void writeToFile(Pixel[] pix, double[][] I, File write) {
 		System.out.println("Writing a 1d pixel array to: " + write);
