@@ -139,7 +139,8 @@ public class FileIO {
 			e.printStackTrace();
 		}
 		PrintStream ps = new PrintStream(fos);
-		ps.println("x\ty\tI");
+		ps.println(Pixel.getHeader());
+		// TODO set the phi value in each pixel before printing out. Ideally this should be done when the path is created...
 		for(Pixel pixel : pix)
 			ps.println(pixel);
 		

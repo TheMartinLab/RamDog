@@ -110,12 +110,15 @@ public class ImagePropertiesViewer extends JPanel implements PropertyChangeListe
 				JToggleButton btn = (JToggleButton) e.getSource();
 				if(btn == btn1ByteInt) {
 					txtDataType.setText("1");
+					getProperties().setBytesPerEntry(1);
 					txtDataType.setEditable(false);
 				} else if(btn == btn2ByteInt) {
 					txtDataType.setText("2");
+					getProperties().setBytesPerEntry(2);
 					txtDataType.setEditable(false);
 				} else if(btn == btn4ByteInt) {
 					txtDataType.setText("4");
+					getProperties().setBytesPerEntry(4);
 					txtDataType.setEditable(false);
 				} else if(btn == btnOther) {
 					txtDataType.setEditable(true);
@@ -187,7 +190,7 @@ public class ImagePropertiesViewer extends JPanel implements PropertyChangeListe
 						} else if(suffix.compareTo("spe") == 0) {
 							getProperties().setSPEDefaults();
 						} else {
-							getProperties().setDefaults();
+							getProperties().setDefaults(curFile);
 						}
 						update();
 					}

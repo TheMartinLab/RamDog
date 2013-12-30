@@ -110,8 +110,9 @@ public class Pixel implements Serializable, Cloneable, Comparable {
 	 */
 	public int getFrameNumber() { return frameNumber; }
 	
+	public static String getHeader() { return "Frame Number\tx\ty\tphi\tQ or R\tI"; }
 	@Override
-	public String toString() { return x + "\t" + y + "\t" + dist + "\t" + phi + "\t" + intensity + "\t" +  + frameNumber; }
+	public String toString() { return frameNumber + "\t" + x + "\t" + y + "\t" + phi + "\t" + dist + "\t" + intensity; }
 	
 	public Object clone() {
 		Pixel p = new Pixel(x, y, intensity, frameNumber);
@@ -134,4 +135,8 @@ public class Pixel implements Serializable, Cloneable, Comparable {
 	public void setDist(double dist) { this.dist = dist; }
 	public double getPhi() { return phi; }
 	public void setPhi(double phi) { this.phi = phi; }
+	public int getX() { return x; }
+	public int getY() { return y; }
+	public void setIntensity(double intensity) { this.intensity = intensity; }
+	public void setFrameNumber(int frameNumber) { this.frameNumber = frameNumber; }
 }

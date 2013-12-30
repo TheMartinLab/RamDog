@@ -917,51 +917,57 @@ public class ImageDisplay extends JFrame {
 
 				@Override
 				public void actionPerformed(ActionEvent arg0) {
-					chooserMultiFile.showSaveDialog(null);
 					chooserMultiFile.setMultiSelectionEnabled(false);
-					File output = chooserMultiFile.getSelectedFile();
-					int len = output.toString().length();
-					String suffix = "";
-					if(output.toString().substring(len-3, len).compareTo("txt") != 0) {
-						suffix = ".txt";
-					} else {
-						output = new File(output.toString().subSequence(0, len-3).toString());
-						suffix = ".txt";
-					}
-					
-					// output regions
-					Pixel[][] thePix = selectionPanel.getRegions();
-					MyPrintStream mps = new MyPrintStream(new File(output + "_summary"));
-					if(thePix != null) {
-						Spot spot;
-						mps.println("Regions");
-						for(int i = 0; i < thePix.length; i++) {
-							FileIO.writeToFileXYI(thePix[i], new File(output + "_region" + i + suffix));
-							spot = new Spot(thePix[i]);
-							spot.calculateSpotProperties();
-							mps.println(spot);
+					int returnVal = chooserMultiFile.showSaveDialog(null);
+					switch(returnVal) {
+					case JFileChooser.APPROVE_OPTION:
+						File output = chooserMultiFile.getSelectedFile();
+						int len = output.toString().length();
+						String suffix = "";
+						if(output.toString().substring(len-3, len).compareTo("txt") != 0) {
+							suffix = ".txt";
+						} else {
+							output = new File(output.toString().subSequence(0, len-3).toString());
+							suffix = ".txt";
 						}
-					};
-					// output Spots
-					thePix = selectionPanel.getSpotsPerFrame();
-					if(thePix != null) {
-						Spot spot;
-						mps.println("Regions");
-						for(int i = 0; i < thePix.length; i++) {
-							FileIO.writeToFileXYI(thePix[i], new File(output + "_spot" + i + suffix));
-							spot = new Spot(thePix[i]);
-							spot.calculateSpotProperties();
-							mps.println(spot);
+						
+						// output regions
+						Pixel[][] thePix = selectionPanel.getRegions();
+						MyPrintStream mps = new MyPrintStream(new File(output + "_summary"));
+						if(thePix != null) {
+							Spot spot;
+							mps.println("Regions");
+							for(int i = 0; i < thePix.length; i++) {
+								FileIO.writeToFileXYI(thePix[i], new File(output + "_region" + i + suffix));
+								spot = new Spot(thePix[i]);
+								spot.calculateSpotProperties();
+								mps.println(spot);
+							}
+						};
+						// output Spots
+						thePix = selectionPanel.getSpotsPerFrame();
+						if(thePix != null) {
+							Spot spot;
+							mps.println("Regions");
+							for(int i = 0; i < thePix.length; i++) {
+								FileIO.writeToFileXYI(thePix[i], new File(output + "_spot" + i + suffix));
+								spot = new Spot(thePix[i]);
+								spot.calculateSpotProperties();
+								mps.println(spot);
+							}
 						}
-					}
-					// output paths
-					thePix = selectionPanel.getPaths();
-					if(thePix != null) {
-						for(int i = 0; i < thePix.length; i++) {
-							FileIO.writeToFileXYI(thePix[i], new File(output + "_path" + i + suffix));
+						// output paths
+						thePix = selectionPanel.getPaths();
+						if(thePix != null) {
+							for(int i = 0; i < thePix.length; i++) {
+								FileIO.writeToFileXYI(thePix[i], new File(output + "_path" + i + suffix));
+							}
 						}
+						mps.close();
+						break;
+						default:
+							return;
 					}
-					mps.close();
 				}
 				
 			});
@@ -2271,7 +2277,9 @@ public class ImageDisplay extends JFrame {
 		private GeneralPath path;
 		@Override
 		public void mouseClicked(MouseEvent arg0) {
-			Point p = arg0.getPoint();
+			click(arg0.getPoint());
+		}
+		public void click(Point p) {
 			System.out.println(p);
 			switch(imagePanel.type) {
 			case Click:
@@ -2349,7 +2357,6 @@ public class ImageDisplay extends JFrame {
 					break;
 				}
 			}
-			
 		}
 		public void submitPath() {
 			imagePanel.setShape(path);
@@ -5352,7 +5359,7 @@ public class ImageDisplay extends JFrame {
 
 		private void setupPathPanel() {
 			pathPanel = new JPanel();
-			pathPanel.setLayout(new GridLayout(0, 3));
+			pathPanel.setLayout(new GridLayout(0, 4));
 			group = new ButtonGroup();
 			JButton btnClose = new JButton("Close Path");
 			btnClose.addActionListener(new ActionListener() {
@@ -5397,6 +5404,7 @@ public class ImageDisplay extends JFrame {
 						}
 						
 						pix.setDist(val);
+						pix.setPhi(coordsPanel.getPhi(point));
 					}
 					selectionPanel.addPath(p);
 				}
@@ -5411,6 +5419,19 @@ public class ImageDisplay extends JFrame {
 				}
 			});
 			pathPanel.add(btnClear);
+			
+			JButton btnClickCenter = new JButton("Center Click");
+			btnClickCenter.addActionListener(new ActionListener() {
+				@Override
+				public void actionPerformed(ActionEvent arg0) {
+					Point2D.Double center_d = calib.getCenter();
+					Point center = new Point((int) Math.rint(center_d.x), (int) Math.rint(center_d.y));
+					center = imagePanel.imageCoordsToViewCoords(center);
+					imagePanel.imageClickListener.click(center);
+				}
+			});
+			pathPanel.add(btnClickCenter);			
+			
 			add(pathPanel);
 			pathPanel.setVisible(false);
 		}
@@ -5481,6 +5502,7 @@ public class ImageDisplay extends JFrame {
 			txtCalibrant.setText(curCalib.getParam(Calibration.parameters.calibrant) + "");
 			txtNotes.setText(curCalib.getParam(Calibration.parameters.notes) + "");
 			txtBackgroundScale.setText(curCalib.getParam(Calibration.parameters.backgroundScale) + "");
+			parse();
 		}
 		// panel in the UI
 		private void setupPanel() {
@@ -5757,6 +5779,11 @@ public class ImageDisplay extends JFrame {
 		}
 		public double[][] getBackgroundData() { return backgroundData; }
 		public void setBackgroundData(double[][] backgroundData) { this.backgroundData = backgroundData; }
+		public Point2D.Double getCenter() {
+			double x = x0;
+			double y = y0;
+			return new Point2D.Double(x, y);
+		}
 	}
 	class CalibrationFilesFrame extends JFrame {
 		private static final long serialVersionUID = 4395858603758801865L;

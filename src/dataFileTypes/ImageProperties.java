@@ -11,10 +11,12 @@
  ******************************************************************************/
 package dataFileTypes;
 
+import java.io.File;
+
 public class ImageProperties {
-	private int bytesPerEntry;
-	private int headerSize;
-	private int endianType;
+	private int bytesPerEntry = 2;
+	private int headerSize = 4096;
+	private int endianType = BIN.LITTLE_ENDIAN;
 	private int[] dimensions;
 	public ImageProperties(int bytesPerEntry, int headerSize, int endianType, int[] dimensions) {
 		setBytesPerEntry(bytesPerEntry);
@@ -23,7 +25,7 @@ public class ImageProperties {
 		setDimensions(dimensions);
 	}
 	public ImageProperties() {
-		setDefaults();
+		setDefaults(null);
 	}
 	public int getBytesPerEntry() { return bytesPerEntry; }
 	public void setBytesPerEntry(int bytesPerEntry) {
@@ -60,11 +62,14 @@ public class ImageProperties {
 		endianType = BIN.LITTLE_ENDIAN;
 		dimensions = new int[] {2048, 2048};
 	}
-	public void setDefaults() {
-		bytesPerEntry = 2;
-		headerSize = 4096;
-		endianType = BIN.LITTLE_ENDIAN;
-		dimensions = new int[] {512, 512};
+	public void setDefaults(File f) {
+		long fileSize = (long) Math.pow(512, 2);
+		if(f != null) {
+			fileSize = f.length();
+			fileSize -= headerSize;
+		}
+		int size = (int) Math.rint(Math.sqrt(((double) fileSize) / ((double) bytesPerEntry))) + 1;
+		dimensions = new int[] {size, size};
 	}
 	
 }
