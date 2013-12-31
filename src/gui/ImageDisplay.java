@@ -6642,8 +6642,8 @@ public class ImageDisplay extends JFrame {
 						try {
 							vals = new ReadFile(chooser.getSelectedFile(), "\t").read();
 						} catch (FileNotFoundException e1) {
-							JOptionPane.showMessageDialog(null, "File: " + chooser.getSelectedFile().getName() + " is not readable.",
-									"File not readable", JOptionPane.ERROR_MESSAGE);
+							// TODO Auto-generated catch block
+							e1.printStackTrace();
 						}
 						Vector<BraggReflection> bragg = new Vector<BraggReflection>();
 						for(int i = 0; i < vals.length; i++) {
