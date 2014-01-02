@@ -37,7 +37,9 @@ public class ImageProperties {
 		this.headerSize = headerSize;
 	}
 	
-	public int getEndianType() { return endianType; }
+	public int getEndianType() { 
+		return endianType; 
+	}
 	public void setEndianType(int endianType) {
 		this.endianType = endianType;
 	}
@@ -52,14 +54,14 @@ public class ImageProperties {
 	public void setSPEDefaults() {
 		bytesPerEntry = 4;
 		headerSize = 4096;
-		endianType = BIN.LITTLE_ENDIAN;
+//		endianType = BIN.LITTLE_ENDIAN;
 		dimensions = new int[] {2084, 2084};
 	}
 	
 	public void setCORDefaults() {
 		bytesPerEntry = 2;
 		headerSize = 4096;
-		endianType = BIN.LITTLE_ENDIAN;
+//		endianType = BIN.LITTLE_ENDIAN;
 		dimensions = new int[] {2048, 2048};
 	}
 	public void setDefaults(File f) {

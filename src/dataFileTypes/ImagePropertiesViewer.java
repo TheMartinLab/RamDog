@@ -47,17 +47,18 @@ public class ImagePropertiesViewer extends JPanel implements PropertyChangeListe
 	private JToggleButton btnLittleEndian;
 	private JToggleButton btnBigEndian;
 	private ActionListener listener;
+	private int endianType = BIN.LITTLE_ENDIAN;
 
 	public ImagePropertiesViewer(ImageProperties prop, JFileChooser fc) {
+		setup();
 		setProperties(new ImageProperties());
 		fc.addPropertyChangeListener(this);
 		setProperties(prop);
-		setup();
 	}
 	public ImagePropertiesViewer(JFileChooser fc) {
+		setup();
 		setProperties(new ImageProperties());
 		fc.addPropertyChangeListener(this);
-		setup();
 	}
 	private void setup() {
 		JPanel pnlMain = new JPanel();
@@ -75,11 +76,33 @@ public class ImagePropertiesViewer extends JPanel implements PropertyChangeListe
 		JPanel pnlButtons = new JPanel();
 		pnlButtons.setLayout(new GridLayout(1, 0));
 		
+		final String little = "Little Endian";
+		final String big = "Big Endian";
+		
+		ActionListener al = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				Object obj = arg0.getSource();
+				if(obj instanceof JToggleButton) {
+					JToggleButton tog = (JToggleButton) obj;
+					String btnText = tog.getText();
+					if(btnText.compareTo(little) == 0)
+						endianType = BIN.LITTLE_ENDIAN;
+					else
+						endianType = BIN.BIG_ENDIAN;
+				}
+			}
+			
+		};
 		ButtonGroup bg = new ButtonGroup();
-		btnLittleEndian = new JToggleButton("Little Endian");
+		btnLittleEndian = new JToggleButton(little);
 		bg.add(btnLittleEndian);
-		btnBigEndian = new JToggleButton("Big Endian");
+		btnBigEndian = new JToggleButton(big);
 		bg.add(btnBigEndian);
+		
+		btnLittleEndian.addActionListener(al);
+		btnBigEndian.addActionListener(al);
 		
 		pnlEndian.add(btnLittleEndian);
 		pnlEndian.add(btnBigEndian);
@@ -221,8 +244,12 @@ public class ImagePropertiesViewer extends JPanel implements PropertyChangeListe
 				txtDataType.setText(""+dataType);
 		}
 		switch(getProperties().getEndianType()) {
-		case BIN.LITTLE_ENDIAN: btnLittleEndian.setSelected(true); break;
-		case BIN.BIG_ENDIAN: btnBigEndian.setSelected(true); break;
+		case BIN.LITTLE_ENDIAN: 
+			btnLittleEndian.doClick(); 
+			break;
+		case BIN.BIG_ENDIAN: 
+			btnBigEndian.doClick(); 
+			break;
 		}
 	}
 	public ImageProperties parseSelections() {
@@ -236,9 +263,6 @@ public class ImagePropertiesViewer extends JPanel implements PropertyChangeListe
 		int bytesPerEntry = Integer.parseInt(txtDataType.getText());
 		properties.setBytesPerEntry(bytesPerEntry);
 		
-		int endianType;
-		if(btnLittleEndian.isSelected()) { endianType = BIN.LITTLE_ENDIAN; }
-		else {endianType = BIN.BIG_ENDIAN; }
 		properties.setEndianType(endianType);
 		return properties;
 	}

@@ -255,7 +255,7 @@ public class ImageDisplay extends JFrame {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				imagePanel.loadImageFile();		
-				curImageFile = new BIN(imgProp);
+//				curImageFile = new BIN(imgProp);
 //				imagePanel.readFile();
 				
 			}
@@ -1770,7 +1770,7 @@ public class ImageDisplay extends JFrame {
 		private JLabel lblx, lbly, lblI, lbl2ndDerx, lbl2ndDery, lblQ, lblPhi, lblH, lblK, lblL, lblMin, lblMax;
 		private double xMid, yMid, qPerPix, xNumPixInOriginalImage, yNumPixInOriginalImage, a;
 		private JTextField txtXMid, txtYMid, txtXPix, txtYPix, txtQPerPix, txtA;
-		private Coordinates coords;
+		private Coordinates coords = Coordinates.RECIPROCAL_SPACE;
 		public CoordsPanel() {
 			super();
 			setBorder(new TitledBorder("Coordinate Info"));
@@ -1912,6 +1912,8 @@ public class ImageDisplay extends JFrame {
 				tog.addActionListener(al);
 				bg.add(tog);
 				pnl.add(tog);
+				if(coord.name().compareTo(coords.name()) == 0)
+					tog.doClick();
 			}
 			box.add(pnl);
 			box.add(Box.createGlue());
@@ -3451,6 +3453,7 @@ public class ImageDisplay extends JFrame {
 			}
 			ImagePropertiesViewer imgPropViewer = new ImagePropertiesViewer(chooserMultiFile);
 			chooserMultiFile.setAccessory(imgPropViewer);
+//			imgPropViewer.update();
 			int returnVal = chooserMultiFile.showDialog(this, "Open");
 			switch(returnVal) {
 			case JFileChooser.APPROVE_OPTION:
@@ -4548,7 +4551,7 @@ public class ImageDisplay extends JFrame {
 		;
 	}
 	class ImageViewPanel extends JPanel {
-		private CurrentView view;
+		private CurrentView view = CurrentView.INPUT_IMAGE;
 		public ImageViewPanel() {
 			super();
 			setBorder(new TitledBorder("Image View"));
@@ -4566,35 +4569,6 @@ public class ImageDisplay extends JFrame {
 					Object obj = e.getSource();
 					if(obj instanceof JToggleButton) {
 						view = CurrentView.valueOf(((JToggleButton) obj).getText());
-//						JToggleButton tog = (JToggleButton) obj;
-//						switch(CurrentView.valueOf((JToggleButton)tog.getText())) {
-//						case BACKGROUND:
-//							view = CurrentView.BACKGROUND;
-//							break;
-//						case FOURIER_TRANSFORM:
-//							view = CurrentView.FOURIER_TRANSFORM;
-//							break;
-//						case INPUT_IMAGE:
-//							view = CurrentView.INPUT_IMAGE;
-//							break;
-//						case CALCULATED:
-//							view = CurrentView.CALCULATED;
-//							break;
-//						case GENERAL_IMAGE:
-//							view = CurrentView.GENERAL_IMAGE;
-//							break;
-//						case _2ND_DER_X:
-//							view = CurrentView._2ND_DER_X;
-//							break;
-//						case _2ND_DER_Y:
-//							view = CurrentView._2ND_DER_Y;
-//							break;
-//						case _2ND_DER_XY:
-//							view = CurrentView._2ND_DER_XY;
-//						default:
-//							break;
-//						
-//						}
 					}
 				}
 			};
@@ -4606,6 +4580,8 @@ public class ImageDisplay extends JFrame {
 				bg.add(tog);
 				pnlButtons.add(tog);
 				tog.addActionListener(al);
+				if(view.name().compareTo(this.view.name()) == 0)
+					tog.doClick();
 			}
 			boxMain.add(pnlButtons);
 			add(boxMain);
