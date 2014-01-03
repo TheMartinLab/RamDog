@@ -10,7 +10,7 @@ See "src/Ramdog Help&Tutorial.docx" for usage instructions.
 Run the program via command line "java -jar Ramdog.jar" or by double clicking on the downloaded file.
 
 What can this software do?
-•	Image Viewing
+•	Image Viewing<br>
   o	Load any binary file
   o	Load common images (.png, .gif, .jpg, etc.)
   o	Load calculated 2D diffraction images
