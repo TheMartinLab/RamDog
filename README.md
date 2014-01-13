@@ -9,6 +9,11 @@ See "src/Ramdog Help&Tutorial.docx" for usage instructions.
 
 Run the program via command line "java -jar Ramdog.jar" or by double clicking on the downloaded file.
 
+Alternatively, you can load this into an instance of the Eclipse IDE with the EGit addon.  Once synchronized, run the "ImageDisplay.java" file to pull up the GUI for 2D X-ray image analysis.  
+
+*** The 2D Fourier Transform currently only works on windows with a CUDA-capable GPU installed.  You may also need to compile the *.dll ***
+
+
 What can this software do?<br>
 -Image Viewing<br>
 &nbsp;&nbsp;-Load any binary file<br>
