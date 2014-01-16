@@ -3300,8 +3300,8 @@ public class ImageDisplay extends JFrame {
 			
 			double[][] qVals = getQValAxes(imageData);
 			
-			double qxmax = 20;
-			double qymax = 20;
+			double qxmax = 10;
+			double qymax = 10;
 			if(qxmax > Math.abs(qVals[0][0])) 
 				qxmax = Math.abs(qVals[0][0]);
 			if(qymax > Math.abs(qVals[1][0]))
@@ -3310,8 +3310,8 @@ public class ImageDisplay extends JFrame {
 				qxmax = qymax;
 			if(qymax > qxmax)
 				qymax = qxmax;
-			double qxstep = 0.03;
-			double qystep = 0.03;
+			double qxstep = 0.01;
+			double qystep = 0.01;
 			boolean interpolate = true;
 			double[][] interpolated = imageData;
 			switch(imgViewPanel.getView()) {
