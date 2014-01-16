@@ -70,6 +70,8 @@ import java.util.Scanner;
 import java.util.SortedSet;
 import java.util.Vector;
 
+import JavaToC.DirectFourierTransform;
+
 import javax.imageio.ImageIO;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -112,6 +114,7 @@ import javax.swing.tree.TreePath;
 
 import color.ColorChooser;
 import color.SigmoidalColorModel;
+
 import io.ReadFile;
 import uiComponents.DataTypeChecker;
 import uiComponents.MyJTextField;
@@ -121,7 +124,6 @@ import chemistry.JAtom;
 import lattice.BraggReflection;
 import lattice.ReciprocalLattice;
 import calculate.Calibration;
-import JavaToC.DirectFourierTransform;
 import analysis.Pixel;
 import analysis.PixelAnalysis;
 import analysis.Spot;
