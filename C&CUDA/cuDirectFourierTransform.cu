@@ -47,12 +47,17 @@ void initDevice() {
 __global__ void byCol(double *dev_input_data_re, double *dev_input_data_im, 
 						double *dev_ft_data_re, double *dev_ft_data_im, 
 						int nRows, int nCols) {
+	
 	int kx = (blockIdx.x * blockDim.x) + threadIdx.x;
 	int ky = (blockIdx.y * blockDim.y) + threadIdx.y;
 	int ft_idx = kx + ky * nCols;
+	
 	cuPrintf("\nx y ft_idx: %d %d", kx, ky, ft_idx);
+	
 	int data_idx = 0;
+	
 	double PI = 3.14159265359;
+	
 	if(kx < nCols && ky < nRows) {
 		for(int t = 0; t < nRows; t++) {
 			data_idx = t * nCols + kx;
@@ -66,12 +71,18 @@ __global__ void byCol(double *dev_input_data_re, double *dev_input_data_im,
 __global__ void byRow(double *dev_input_data_re, double *dev_input_data_im, 
 						double *dev_ft_data_re, double *dev_ft_data_im, 
 						int nRows, int nCols) {
+						
 	int kx = (blockIdx.x * blockDim.x) + threadIdx.x;
 	int ky = (blockIdx.y * blockDim.y) + threadIdx.y;
+	
 	int ft_idx = kx + ky * nCols;
+	
 	cuPrintf("\nx y ft_idx: %d %d", kx, ky, ft_idx);
+	
 	int data_idx = 0;
+	
 	double PI = 3.14159265359;
+	
 	if(kx < nCols && ky < nRows) {
 		for(int t = 0; t < nCols; t++) {
 			data_idx = ky * nCols + t;
@@ -156,8 +167,11 @@ void runDFT(double *data, double *host_ft_data_re, double *host_ft_data_im, int 
 	printf("\nthreadsPerBlock (%d, %d), numBlocks (%d, %d)", threadsPerBlock.x, threadsPerBlock.y, numBlocks.x, numBlocks.y);
 	printf("\nCommencing Print before copy to device");
 	printArray(data, 1, nCols);
+	
 	/* COPY DATA TO DEVICE */	
 	cudaMemcpy(dev_input_data_re, data, array_size, cudaMemcpyHostToDevice);
+	
+	/* RUN DIRECT FOURIER TRANSFORM (DFT) */
 	if(colFirst == 0) {
 		byRow<<<numBlocks, threadsPerBlock>>>(dev_input_data_re, dev_input_data_im, dev_ft_data_re, dev_ft_data_im, nRows, nCols);
 		cudaMemcpy(dev_input_data_re, dev_ft_data_re, array_size, cudaMemcpyDeviceToDevice);
