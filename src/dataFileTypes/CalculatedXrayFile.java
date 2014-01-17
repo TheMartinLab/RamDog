@@ -32,6 +32,8 @@ public class CalculatedXrayFile {
 	private Vector<JVector[]> projections;
 	private Point2D.Double midPoint;
 	private boolean isOldFormatXrayFile;
+	private int numFilesPerImage = 1;
+	private int numCalculationsPerFile = 1;
 	
 	public String toString() {
 		int maxLen = Math.min(25, file.getName().length());
@@ -51,18 +53,22 @@ public class CalculatedXrayFile {
 		String[] vals;
 		Scanner lineScanner;
 		Vector<JVector> aProjection = new Vector<JVector>();
+		numFilesPerImage = 0;
 		do {
 			line = s.nextLine();
 			lineScanner = new Scanner(line);
 			while(lineScanner.hasNext()) {
 				vals = lineScanner.next().split(JVectorToStringSeparation);
 				if(vals.length == 3) {
-					aProjection.add(new JVector(Double.valueOf(vals[0]), Double.valueOf(vals[1]),
-							Double.valueOf(vals[2])));
+					JVector vec = new JVector(Double.valueOf(vals[0]), Double.valueOf(vals[1]),
+							Double.valueOf(vals[2]));
+					aProjection.add(vec);
 				}
 				if(aProjection.size() == 3) {
-					projections.add((JVector[]) aProjection.toArray(new JVector[aProjection.size()]));
+					JVector[] arr = (JVector[]) aProjection.toArray(new JVector[aProjection.size()]);
+					projections.add(arr);
 					aProjection.clear();
+					numFilesPerImage++;
 				}
 			}
 			lineScanner.close();
@@ -104,24 +110,30 @@ public class CalculatedXrayFile {
 				new JVector(1, 1, 1),
 		};
 		if(!forcedProjection) {
-			if(fName.contains("110") || fName.contains("101") || fName.contains("011"))
+			if(fName.contains("110") || fName.contains("101") || fName.contains("011")) {
+				numCalculationsPerFile = 6;
 				axes = new JVector[] {
 					new JVector(-1, 0, 0),
 					new JVector(0, 1, -1),
 					new JVector(0, -1, -1),
 				};
-			else if(fName.contains("111"))
+			}
+			else if(fName.contains("111")) {
+				numCalculationsPerFile = 4;
 				axes = new JVector[] {
 					new JVector(1, -1, 0),
 					new JVector(-1, -1, 2),
 					new JVector(-1, -1, -1),
 				};
-			else if(fName.contains("001") || fName.contains("010") || fName.contains("100"))
+			}
+			else if(fName.contains("001") || fName.contains("010") || fName.contains("100")) {
+				numCalculationsPerFile = 3;
 				axes = new JVector[] {
 					new JVector(1, 0, 0),
 					new JVector(0, 1, 0),
 					new JVector(0, 0, 1),
 				};
+			}
 		}
 		
 		projections.add(axes);
@@ -150,6 +162,7 @@ public class CalculatedXrayFile {
 	private void read_xyI_column(Scanner s) {
 		Vector<double[]> lines = new Vector<double[]>(5000);
 		double x, y, I;
+		numFilesPerImage = 0;
 		do {
 			String line = s.nextLine();
 			if(line.contains("Diffraction axes")) {
@@ -181,6 +194,7 @@ public class CalculatedXrayFile {
 		midPoint = null;
 		MyFileInputStream mfis = new MyFileInputStream(file);
 		Scanner s = mfis.getScanner();
+		numFilesPerImage = 0;
 		if(isOldFormatXrayFile)
 			readOldFormat(s);
 		else {
@@ -191,11 +205,15 @@ public class CalculatedXrayFile {
 					line = setAxes(s);
 					setMaxQVals(line);
 					setDeltaQ(s.nextLine()); 
+				} else if(line.contains("Summed file names: ")) {
+					do {
+						line = s.nextLine();
+						numFilesPerImage++;
+					} while(!line.contains("Summed Xray Data"));
+					read_xyI_column(s);
 				}
 			} while(s.hasNextLine() && line.substring(0, 1).compareTo(commentLineStartsWith) == 0);
 			
-			if(line.contains("xyI_column") || line.contains("Summed Xray Data:"))
-				read_xyI_column(s);
 		}
 		mfis.close();
 	}
@@ -250,6 +268,17 @@ public class CalculatedXrayFile {
 	}
 	public JVector qToHKL(JVector Q, double a) {
 		return JVector.multiply(Q, a/2/Math.PI);
+	}
+	public double[][] normalize(double[][] calcData) {
+		double[][] normData = new double[calcData.length][calcData[0].length];
+		double scalar = numFilesPerImage * numCalculationsPerFile;
+		for(int i = 0; i < normData.length; i++) {
+			for(int j = 0; j < normData[i].length; j++) {
+				normData[i][j] = calcData[i][j] / scalar;
+			}
+		}
+		
+		return normData;
 	}
 	/* ******************* */
 	/* GETTERS AND SETTERS */

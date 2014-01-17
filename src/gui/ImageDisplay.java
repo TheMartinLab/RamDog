@@ -253,7 +253,9 @@ public class ImageDisplay extends JFrame {
 		JMenuItem loadXray = new JMenuItem("Load Xray Image");
 		loadXray.addActionListener(new ActionListener() {
 			@Override
-			public void actionPerformed(ActionEvent arg0) {
+			public void actionPerformed(ActionEvent arg0) { 
+				coordsPanel.buttonClick(Coordinates.RECIPROCAL_SPACE);
+				imgViewPanel.buttonClick(CurrentView.INPUT_IMAGE);
 				imagePanel.loadImageFile();		
 //				curImageFile = new BIN(imgProp);
 //				imagePanel.readFile();
@@ -274,6 +276,8 @@ public class ImageDisplay extends JFrame {
 		loadCalc.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent e) {
+				coordsPanel.buttonClick(Coordinates.CALCULATED_SPACE);
+				imgViewPanel.buttonClick(CurrentView.CALCULATED);
 				String prevTitle = chooserFolder.getDialogTitle();
 				chooserFolder.setDialogTitle("Load calculated xray images.");
 				int returnVal = chooserFolder.showOpenDialog(null);
@@ -333,6 +337,13 @@ public class ImageDisplay extends JFrame {
 				isOldFormatXrayFile = oldFormat.getState();
 			}
 		});
+		final JCheckBoxMenuItem normalizeCalcImage = new JCheckBoxMenuItem("Normalize Calculated Image");
+		normalizeCalcImage.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				selectionPanel.normalizeCalculatedImage = normalizeCalcImage.getState();
+			}
+		});
 		JMenuItem spotPickImage = new JMenuItem("Spot pick this image.");
 		spotPickImage.addActionListener(new ActionListener() {
 			@Override
@@ -369,6 +380,7 @@ public class ImageDisplay extends JFrame {
 		image.add(showColorModel);
 		image.add(new JSeparator());
 		image.add(oldFormat);
+		image.add(normalizeCalcImage);
 		JMenu imageSubMenu = new JMenu("Toggleable options");
 		final JCheckBoxMenuItem fillSpace = new JCheckBoxMenuItem("Fill All Available Space");
 		final JCheckBoxMenuItem maintainAspectRatio = new JCheckBoxMenuItem("Maintain Aspect Ratio");
@@ -1771,6 +1783,7 @@ public class ImageDisplay extends JFrame {
 		private double xMid, yMid, qPerPix, xNumPixInOriginalImage, yNumPixInOriginalImage, a;
 		private JTextField txtXMid, txtYMid, txtXPix, txtYPix, txtQPerPix, txtA;
 		private Coordinates coords = Coordinates.RECIPROCAL_SPACE;
+		private Vector<JToggleButton> togCoords;
 		public CoordsPanel() {
 			super();
 			setBorder(new TitledBorder("Coordinate Info"));
@@ -1907,13 +1920,15 @@ public class ImageDisplay extends JFrame {
 			JPanel pnl = new JPanel();
 			pnl.setLayout(new GridLayout(2, 0));
 			JToggleButton tog;
+			togCoords = new Vector<JToggleButton>();
 			for(Coordinates coord : Coordinates.values()) {
 				tog = new JToggleButton(coord.name());
 				tog.addActionListener(al);
 				bg.add(tog);
 				pnl.add(tog);
-				if(coord.name().compareTo(coords.name()) == 0)
-					tog.doClick();
+				togCoords.add(tog);
+
+				buttonClick(coords);
 			}
 			box.add(pnl);
 			box.add(Box.createGlue());
@@ -2252,6 +2267,13 @@ public class ImageDisplay extends JFrame {
 			
 			double dist = Math.sqrt(Math.pow(x * xScale, 2) + Math.pow(y * yScale, 2));
 			return dist;
+		}
+		public void buttonClick(Coordinates coord) {
+			for(JToggleButton tog : togCoords)
+				if(tog.getText().compareTo(coord.name()) == 0) {
+					tog.doClick();
+					return;
+				}
 		}
 		public void setMinMax(double min, double max) {
 			if(min > 100000)
@@ -3366,6 +3388,9 @@ public class ImageDisplay extends JFrame {
 					fourierTransformData[1][xMid+1][yMid-1] + fourierTransformData[1][xMid+1][yMid+1] ) / 8;
 			imagePanel.setFourierTransformData(fourierTransformData);
 			loadFTImage();
+
+			coordsPanel.buttonClick(Coordinates.REAL_SPACE);
+			imgViewPanel.buttonClick(CurrentView.FOURIER_TRANSFORM);
 			
 		}
 		private double[][][] shiftByHalfHalf(double[][][] input) {
@@ -4552,6 +4577,7 @@ public class ImageDisplay extends JFrame {
 	}
 	class ImageViewPanel extends JPanel {
 		private CurrentView view = CurrentView.INPUT_IMAGE;
+		private Vector<JToggleButton> togView;
 		public ImageViewPanel() {
 			super();
 			setBorder(new TitledBorder("Image View"));
@@ -4575,16 +4601,25 @@ public class ImageDisplay extends JFrame {
 
 			ButtonGroup bg = new ButtonGroup();
 			JToggleButton tog;
+			togView = new Vector<JToggleButton>();
 			for(CurrentView view : CurrentView.values()) {
 				tog = new JToggleButton(view.name());
 				bg.add(tog);
 				pnlButtons.add(tog);
 				tog.addActionListener(al);
-				if(view.name().compareTo(this.view.name()) == 0)
-					tog.doClick();
+				togView.add(tog);
 			}
+			buttonClick(view);
 			boxMain.add(pnlButtons);
 			add(boxMain);
+		}
+
+		public void buttonClick(CurrentView view) {
+			for(JToggleButton tog : togView)
+				if(tog.getText().compareTo(view.name()) == 0) {
+					tog.doClick();
+					return;
+				}
 		}
 		public CurrentView getView() { return view; }
 		public void setView(CurrentView view) { this.view = view; }
@@ -4676,6 +4711,7 @@ public class ImageDisplay extends JFrame {
 		private DefaultTreeModel model;
 		int numSpots, numPaths, numRegions, numBragg, numTargetSpots;
 		private NodeSelectionListener nodeListener;
+		private boolean normalizeCalculatedImage = false;
 		public SelectionPanel() {
 			super();
 			setBorder(new TitledBorder("Pixel Groupings"));
@@ -5122,14 +5158,18 @@ public class ImageDisplay extends JFrame {
 			contextPanel.txt.setText("Currently Displayed File: " + imagePanel.xrayFile.getFile().toString());
 			xi.setOldFormatXrayFile(isOldFormatXrayFile);
 			xi.read();
+			double[][] calcData = imagePanel.getCalculatedData();
+			if(normalizeCalculatedImage)
+				calcData = xi.normalize(calcData);
 			Point2D.Double midPoint = xi.getMidPoint();
 			int maxX = (int) Math.floor(midPoint.x) * 2 + 1;
 			int maxY = (int) Math.floor(midPoint.y) * 2 + 1;
 			double qStep = xi.getqStep();
 			coordsPanel.setImageParams(midPoint.x, midPoint.y, maxX, maxY, qStep);
 			imagePanel.recalc2ndDers = false;
-			imagePanel.loadImage(imagePanel.getCalculatedData());
+			imagePanel.loadImage(calcData);
 			imagePanel.recalc2ndDers = true;
+			imagePanel.resetZoom();
 		}
 		private Pixel[][] getPixelArray(DefaultMutableTreeNode root) {
 			if(root.getChildCount() == 0) { return null; }
