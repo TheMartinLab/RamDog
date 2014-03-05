@@ -1,0 +1,831 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.1.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true">  
+  <class id="1" language="java" name="gui.ImageDisplay.OutputListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="109" x="41" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="2" language="java" name="gui.ImageDisplay.Coordinates" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="4037" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="3" language="java" name="gui.ImageDisplay.ImagePanel" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="91" x="3660" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="gui.ImageDisplay.CalibrationFilesFrame" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="147" x="4866" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="5" language="java" name="gui.ImageDisplay.maskFilterType" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="3878" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="6" language="java" name="gui.ImageDisplay.ImageMouseMotionListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="182" x="190" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="7" language="java" name="gui.ImageDisplay.ClickMode" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="3376" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="8" language="java" name="gui.ImageDisplay.ResetZoomListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="136" x="412" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="gui.ImageDisplay.SetDisplaySizeListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="155" x="588" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="10" language="java" name="gui.ImageDisplay.imageFilterFiltering" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="132" x="3045" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="11" language="java" name="gui.ImageDisplay.ContextPanel" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="100" x="783" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="gui.ImageDisplay.ColorPanel" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="87" x="1229" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="13" language="java" name="gui.ImageDisplay.FilterPanel" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="87" x="923" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="14" language="java" name="gui.ImageDisplay.imageFilterRange" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="123" x="2882" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="15" language="java" name="gui.ImageDisplay.ImageOptionsFrame.UpdateListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="111" x="1050" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="16" language="java" name="gui.ImageDisplay.ImageClickListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="134" x="3704" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="17" language="java" name="gui.ImageDisplay.SelectionInterpreter" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="138" x="1356" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="18" language="java" name="gui.ImageDisplay.CalibrationPanel" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="117" x="4707" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="19" language="java" name="gui.ImageDisplay.CurrentView" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="4196" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="20" language="java" name="gui.ImageDisplay.ImageOptionsFrame" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="139" x="1050" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="21" language="java" name="gui.ImageDisplay.SetImageSizeListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="149" x="1534" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="22" language="java" name="gui.ImageDisplay.CalculationFrame" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="123" x="1723" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="23" language="java" name="gui.ImageDisplay.ShapesPanel" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="99" x="4213" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="24" language="java" name="gui.ImageDisplay.CalculationMenu" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="118" x="1886" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="25" language="java" name="gui.ImageDisplay.OutputMenu" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="93" x="3464" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="26" language="java" name="gui.ImageDisplay.ColorFilter" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="3217" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="27" language="java" name="gui.ImageDisplay.SelectionPanel.NodeSelectionListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="153" x="4673" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="28" language="java" name="gui.ImageDisplay.shapeOptions" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="4355" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="29" language="java" name="gui.ImageDisplay.ImageViewPanel" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="4033" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="30" language="java" name="gui.ImageDisplay.FourierViewPanel" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="124" x="4373" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="31" language="java" name="gui.ImageDisplay" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="100" x="3620" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="32" language="java" name="gui.ImageDisplay.FourierView" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="4514" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="33" language="java" name="gui.ImageDisplay.CoordsPanel" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="97" x="3875" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="34" language="java" name="gui.ImageDisplay.RedrawListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="115" x="2044" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="35" language="java" name="gui.ImageDisplay.ImageKeyListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="127" x="2199" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="36" language="java" name="gui.ImageDisplay.imageFilterScaling" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="129" x="3535" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="37" language="java" name="gui.ImageDisplay.OutputMenu.FileShowerFrame" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="123" x="2719" y="223"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="38" language="java" name="gui.ImageDisplay.ZoomInListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="113" x="2366" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <enumeration id="39" language="java" name="gui.ImageDisplay.SelectionMode" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="2519" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="40" language="java" name="gui.ImageDisplay.shapePathRegion" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="124" x="2678" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <enumeration id="41" language="java" name="gui.ImageDisplay.XrayType" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="119" x="2842" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </enumeration>  
+  <class id="42" language="java" name="gui.ImageDisplay.ImageMouseWheelListener" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="180" x="3001" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="43" language="java" name="gui.ImageDisplay.SelectionPanel" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="109" x="4558" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <class id="44" language="java" name="gui.ImageDisplay.ActivePixelDeterminationFrame" project="RamdogPrototype1" 
+    file="/RamdogPrototype1/src/gui/ImageDisplay.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="53" width="203" x="3221" y="130"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
+      visibility="true">      
+      <attributes public="false" package="false" protected="false" private="false" static="true"/>      
+      <operations public="false" package="false" protected="false" private="false" static="true"/>    
+    </display>  
+  </class>  
+  <association id="45">    
+    <end type="SOURCE" refId="33" navigable="false">      
+      <attribute id="46" name="coords"/>      
+      <multiplicity id="47" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="48">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="34"/>  
+  </nesting>  
+  <association id="49">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="50" name="calcMenu"/>      
+      <multiplicity id="51" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="52">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="30"/>  
+  </nesting>  
+  <association id="53">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="54" name="filterScaling"/>      
+      <multiplicity id="55" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="36" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="56">    
+    <end type="SOURCE" refId="23" navigable="false">      
+      <attribute id="57" name="selected"/>      
+      <multiplicity id="58" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="28" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="59">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="9"/>  
+  </nesting>  
+  <association id="60">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="61" name="imgViewPanel"/>      
+      <multiplicity id="62" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="29" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="63">    
+    <bendpoint x="4182" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="19"/>  
+  </nesting>  
+  <nesting id="64">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="33"/>  
+  </nesting>  
+  <nesting id="65">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="40"/>  
+  </nesting>  
+  <nesting id="66">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="42"/>  
+  </nesting>  
+  <association id="67">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="68" name="coordsPanel"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="33" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="71" name="contextPanel"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="73">    
+    <bendpoint x="4854" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="4"/>  
+  </nesting>  
+  <nesting id="74">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="11"/>  
+  </nesting>  
+  <nesting id="75">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="39"/>  
+  </nesting>  
+  <association id="76">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="77" name="filterPanel"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="79">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="13"/>  
+  </nesting>  
+  <nesting id="80">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="17"/>  
+  </nesting>  
+  <nesting id="81">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="1"/>  
+  </nesting>  
+  <nesting id="82">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="35"/>  
+  </nesting>  
+  <association id="83">    
+    <end type="SOURCE" refId="18" navigable="false">      
+      <attribute id="84" name="calibFrame"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="86">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="87" name="colorPanel"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="89">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="43"/>  
+  </nesting>  
+  <nesting id="90">    
+    <bendpoint x="4342" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="28"/>  
+  </nesting>  
+  <nesting id="91">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="15"/>  
+  </nesting>  
+  <association id="92">    
+    <bendpoint x="4875" y="130"/>    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="93" name="calibFrame"/>      
+      <multiplicity id="94" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="95">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="96" name="selectionPanel"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="43" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="98">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="23"/>  
+  </nesting>  
+  <association id="99">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="100" name="imageClickListener"/>      
+      <multiplicity id="101" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="16" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="102">    
+    <bendpoint x="3802" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="36"/>  
+  </nesting>  
+  <association id="103">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="104" name="activePixelFrame"/>      
+      <multiplicity id="105" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="44" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="106">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="25"/>  
+  </nesting>  
+  <nesting id="107">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="21"/>  
+  </nesting>  
+  <nesting id="108">    
+    <bendpoint x="3823" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="16"/>  
+  </nesting>  
+  <nesting id="109">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="44"/>  
+  </nesting>  
+  <nesting id="110">    
+    <bendpoint x="3629" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="26"/>  
+  </nesting>  
+  <nesting id="111">    
+    <bendpoint x="3608" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="10"/>  
+  </nesting>  
+  <nesting id="112">    
+    <bendpoint x="4527" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="32"/>  
+  </nesting>  
+  <association id="113">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="114" name="filter"/>      
+      <multiplicity id="115" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="116">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="3"/>  
+  </nesting>  
+  <association id="117">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="118" name="calib"/>      
+      <multiplicity id="119" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="18" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="120">    
+    <end type="SOURCE" refId="43"/>    
+    <end type="TARGET" refId="27"/>  
+  </nesting>  
+  <association id="121">    
+    <end type="SOURCE" refId="43" navigable="false">      
+      <attribute id="122" name="nodeListener"/>      
+      <multiplicity id="123" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="27" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="124">    
+    <bendpoint x="3844" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="5"/>  
+  </nesting>  
+  <nesting id="125">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="18"/>  
+  </nesting>  
+  <association id="126">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="127" name="imageOptionsFrame"/>      
+      <multiplicity id="128" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="129">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="29"/>  
+  </nesting>  
+  <nesting id="130">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="38"/>  
+  </nesting>  
+  <nesting id="131">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="12"/>  
+  </nesting>  
+  <association id="132">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="133" name="type"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="135">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="24"/>  
+  </nesting>  
+  <association id="136">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="137" name="ftViewPanel"/>      
+      <multiplicity id="138" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="30" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="139">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="6"/>  
+  </nesting>  
+  <association id="140">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="141" name="theColor"/>      
+      <multiplicity id="142" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="143">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="144" name="outputMenu"/>      
+      <multiplicity id="145" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="146">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="147" name="filterRange"/>      
+      <multiplicity id="148" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="149">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="20"/>  
+  </nesting>  
+  <nesting id="150">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="8"/>  
+  </nesting>  
+  <association id="151">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="152" name="imagePanel"/>      
+      <multiplicity id="153" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="154">    
+    <end type="SOURCE" refId="29" navigable="false">      
+      <attribute id="155" name="view"/>      
+      <multiplicity id="156" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="157">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="158" name="calcFrame"/>      
+      <multiplicity id="159" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="160">    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="161" name="click"/>      
+      <multiplicity id="162" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="163">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="22"/>  
+  </nesting>  
+  <nesting id="164">    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="41"/>  
+  </nesting>  
+  <association id="165">    
+    <end type="SOURCE" refId="30" navigable="false">      
+      <attribute id="166" name="view"/>      
+      <multiplicity id="167" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="32" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="168">    
+    <bendpoint x="4002" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="2"/>  
+  </nesting>  
+  <association id="169">    
+    <end type="SOURCE" refId="25" navigable="false">      
+      <attribute id="170" name="showFiles"/>      
+      <multiplicity id="171" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="37" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="172">    
+    <end type="SOURCE" refId="31" navigable="false">      
+      <attribute id="173" name="shapesPanel"/>      
+      <multiplicity id="174" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <nesting id="175">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="37"/>  
+  </nesting>  
+  <nesting id="176">    
+    <bendpoint x="3587" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="14"/>  
+  </nesting>  
+  <nesting id="177">    
+    <bendpoint x="3781" y="130"/>    
+    <end type="SOURCE" refId="31"/>    
+    <end type="TARGET" refId="7"/>  
+  </nesting>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

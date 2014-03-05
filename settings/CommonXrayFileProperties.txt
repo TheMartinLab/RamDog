@@ -1,0 +1,7 @@
+% Common file dimensions. Start with the keyword "dims" followed by 
+% the number of pixels per image dimension  
+dims 512 1024 2048 2084
+
+% integer data sizes in bytes. Start with the keyword "size" followed
+% by the size of each data element in bytes
+size 1 2 4
