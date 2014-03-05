@@ -33,7 +33,7 @@ public class SpotStamp {
 	 */
 	public void addToStamp(Pixel toAdd, int x, int y) {
 		if(!inStamp(toAdd, x, y)) {
-			stamp.add(new Pixel(toAdd.getXCoordinate() - x, toAdd.getYCoordinate() - y, 0, 0));
+			stamp.add(new Pixel(toAdd.getX() - x, toAdd.getY() - y, 0, 0));
 		}
 	}
 	/**
@@ -52,8 +52,8 @@ public class SpotStamp {
 		Pixel[] thePixels = new Pixel[stamp.size()];
 		int curx, cury;
 		for(int i = 0; i < thePixels.length; i++) {
-			curx = stamp.get(i).getXCoordinate();
-			cury = stamp.get(i).getYCoordinate();
+			curx = stamp.get(i).getX();
+			cury = stamp.get(i).getY();
 			thePixels[i] = new Pixel(x+curx, y+cury, 0, 0);
 		}
 		return thePixels;
@@ -67,14 +67,14 @@ public class SpotStamp {
 	 */
 	private boolean inStamp(Pixel toAdd, int x, int y) {
 		int xTest, yTest;
-		x = toAdd.getXCoordinate() - x;
-		y = toAdd.getYCoordinate() - y;
+		x = toAdd.getX() - x;
+		y = toAdd.getY() - y;
 		
 		int stampSize = stamp.size();
 		int idx = 0;
 		while(idx < stampSize) {
-			xTest = stamp.get(idx).getXCoordinate();
-			yTest = stamp.get(idx).getYCoordinate();
+			xTest = stamp.get(idx).getX();
+			yTest = stamp.get(idx).getY();
 			if(x == xTest && y == yTest) { 
 				return true;
 			}

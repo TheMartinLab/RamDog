@@ -102,7 +102,7 @@ public class PixelAnalysis {
 				}
 			}
 		}
-		return new Point(pix.getXCoordinate(), pix.getYCoordinate());
+		return new Point(pix.getX(), pix.getY());
 	}
 	public void setSearchRadius(int x, int y) {
 		xRadius = x;
