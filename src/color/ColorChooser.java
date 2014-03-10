@@ -204,7 +204,17 @@ public class ColorChooser extends JPanel
     /* ************************************** */
     /* RUNTIME METHODS FOR LEVEL MANIPULATION */
     /* ************************************** */
-    
+    public void newLevels(double[] vals, Color[] col) {
+    	levels.clear();
+    	for(int i = 0; i < vals.length; i++)
+    		levels.add(vals[i]);
+    	
+    	colors.clear();
+    	for(int i = 0; i < col.length; i++)
+    		colors.add(col[i]);
+    	
+    	refreshTable();
+    }
     private void addRow() {
     	int lastSelectedRow = 1;
     	if(table.getRowCount() == 0) {

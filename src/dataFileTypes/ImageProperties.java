@@ -91,15 +91,21 @@ public class ImageProperties {
 		
 		if(dataSizes == null)
 			return estimateWithoutDataSizes(f);
+		
+		return null;
 	}
 	
 	private int[] estimateWithoutFileDims(File f) {
 		long fileBytes = f.length();
 		
+		return null;
+		
 	}
 	
-	private int estimateWithoutDataSizes(File f) {
+	private int[] estimateWithoutDataSizes(File f) {
 		long fileBytes = f.length();
+		
+		return null;
 	}
 	
 	private void parseCommonProperties() {

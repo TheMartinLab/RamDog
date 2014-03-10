@@ -65,6 +65,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.util.Arrays;
 import java.util.Enumeration;
+import java.util.NoSuchElementException;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.SortedSet;
@@ -114,7 +115,6 @@ import javax.swing.tree.TreePath;
 
 import color.ColorChooser;
 import color.SigmoidalColorModel;
-
 import io.ReadFile;
 import uiComponents.DataTypeChecker;
 import uiComponents.MyJTextField;
@@ -183,7 +183,8 @@ public class ImageDisplay extends JFrame {
 	private ColorChooser colorChooser;
 	public final static int HORIZONTAL_STRUT_WIDTH = 10;
 	public final static int VERTICAL_STRUT_HEIGHT = 10;
-
+	private JCheckBoxMenuItem autoLevelImage;
+	
 	private boolean isOldFormatXrayFile = false;
 	private Color badEntryColor = Color.YELLOW;
 	private Color okEntryColor = new JTextField().getBackground();
@@ -369,7 +370,15 @@ public class ImageDisplay extends JFrame {
 				colorChooser.showGUI();
 			}
 		});
+
+		autoLevelImage = new JCheckBoxMenuItem("Auto-scale image?");
 		
+		showColorModel.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				colorChooser.showGUI();
+			}
+		});
 		JMenuItem spotPickSeries = new JMenuItem("Spot pick a series of images");
 		spotPickSeries.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -378,6 +387,7 @@ public class ImageDisplay extends JFrame {
 		});
 		image.add(spotPickSeries);
 		image.add(showColorModel);
+		image.add(autoLevelImage);
 		image.add(new JSeparator());
 		image.add(oldFormat);
 		image.add(normalizeCalcImage);
@@ -626,7 +636,6 @@ public class ImageDisplay extends JFrame {
 			grp.add(btnAll);
 			grp.add(btnRegion);
 			grp.add(btnFromCenter);
-			btnAll.doClick();
 			
 			
 			JButton btnSave = new JButton("Save Image");
@@ -689,6 +698,8 @@ public class ImageDisplay extends JFrame {
 			btnAll.addActionListener(al);
 			btnRegion.addActionListener(al);
 			btnFromCenter.addActionListener(al);
+
+			btnAll.doClick();
 			
 			btnSave.addActionListener(new ActionListener() {
 				@Override
@@ -1049,17 +1060,21 @@ public class ImageDisplay extends JFrame {
 				imagePanel.curFileIdx = 0;
 			}
 			chooserMultiFile.setCurrentDirectory(imagePanel.filesInFolder[imagePanel.curFileIdx]);
-			chooserMultiFile.showSaveDialog(null);
+			int returnVal = chooserMultiFile.showSaveDialog(null);
+			switch(returnVal) {
+			case JFileChooser.CANCEL_OPTION:
+				return;
+			}
 			File output = chooserMultiFile.getSelectedFile();
 			System.out.println("Running History:");
 			System.out.println("File order:");
 			for(int i = 0; i < files.length; i++) {
 				System.out.println(files[i]);
 			}
-			boolean runRegions = false;
-			boolean runSpots = false;
+			boolean runRegions = true;
+			boolean runSpots = true;
 			boolean runPaths = true;
-			boolean integrate = false;
+			boolean integrate = true;
 			activePixelFrame.isSelectingTargetSpots = false;
 			if(integrate) {
 				String input = "";
@@ -1226,6 +1241,9 @@ public class ImageDisplay extends JFrame {
 			
 			File numSpotsPerFrame_Q = new File(output + "_spots -- Q values per frame.txt");
 			MyPrintStream mps_numSpotsPerFrame_Q = null;
+			runRegions = regions != null;
+			runSpots = spots != null;
+			runPaths = paths != null;
 			
 			if(runRegions) { 
 				regionI = new double[regions.length][files.length]; 
@@ -1343,20 +1361,20 @@ public class ImageDisplay extends JFrame {
 				FileIO.writeIntegratedToFile(regionI, new File(output + "_region.txt"));
 				// normalize regions
 				regionNorm = normalize(regionI, secondsPerFrame, regionQAndPhiAndIAndXY, regionXandY);
-				FileIO.write2DArrToFile(regionNorm, new File(output + "normalized_region.txt"));
+				FileIO.write2DArrToFile(regionNorm, new File(output + "_normalized_region.txt"));
 			}
 			if(runSpots) { 
 				FileIO.writeIntegratedToFile(spotI, new File(output + "_spot.txt"));
 				// normalize spots
 				spotNorm = normalize(spotI, secondsPerFrame, spotQAndPhiAndIAndXY, spotXandY);
-				FileIO.write2DArrToFile(spotNorm, new File(output + "normalized_spot.txt"));
-				FileIO.write2DArrToFile(spotQAndPhiAndIAndXY, new File(output + "QandPhiandI.txt"));
+				FileIO.write2DArrToFile(spotNorm, new File(output + "_normalized_spot.txt"));
+				FileIO.write2DArrToFile(spotQAndPhiAndIAndXY, new File(output + "_QandPhiandI.txt"));
 			}
 			if(runPaths) {
 				FileIO.writeIntegratedToFile(pathI, new File(output + "_path.txt"));
 				// normalize regions
 				pathNorm = normalize(pathI, secondsPerFrame, pathQAndPhiAndIAndXY, pathXandY);
-				FileIO.write2DArrToFile(pathNorm, new File(output + "normalized_path.txt"));
+				FileIO.write2DArrToFile(pathNorm, new File(output + "_normalized_path.txt"));
 			}
 			if(spotPick) {
 				mps_spotPick.close();
@@ -2229,11 +2247,11 @@ public class ImageDisplay extends JFrame {
 			case RECIPROCAL_SPACE:
 				double[] d = imagePanel.get2ndDers(p);
 				double[] qphi = new double[2];
-				if(calib != null) 
+				if(calib.hasCalibration) 
 					qphi = calib.coordsToQAndPhi(p.x, p.y);
 				else {
-					qphi[0] = pixToQ(p);
-					qphi[1] = getPhi(p);
+					qphi[0] = 0;
+					qphi[1] = 0;
 				}
 				lblPhi.setText("" + format(qphi[1]));
 				lblQ.setText("" + format(qphi[0]));
@@ -2374,6 +2392,7 @@ public class ImageDisplay extends JFrame {
 				case none:
 					break;
 				case pixel:
+					numClicks = 0;
 					break;
 				case spot:
 					break;
@@ -2960,6 +2979,7 @@ public class ImageDisplay extends JFrame {
 			setFocusable(true);
 			getParent().repaint();
 			loadImage(inputData);
+			
 		}
 		private double[][] subtractBackground(double[][] data) {
 			double[][] backgroundData = calib.getBackgroundData();
@@ -3086,6 +3106,11 @@ public class ImageDisplay extends JFrame {
 			}
 			imageMin = getMin(imageMin);
 			imageMax = getMax(imageMax);
+			if (autoLevelImage.isSelected()) {
+				double[] vals = new double[] {imageMin, imageMax};
+				Color[] col = new Color[] {Color.white, Color.black};
+				colorChooser.newLevels(vals, col);
+			}
 			double I;
 //			if(min < 0) { min = 0; }
 			for(int i = 0; i < imgWidth; i++) {
@@ -4289,6 +4314,8 @@ public class ImageDisplay extends JFrame {
 				btn.addActionListener(al_clickType);
 				grpImageOrClick.add(btn);
 				pnlImageOrClick.add(btn);
+				if(type == maskFilterType.WholeImage)
+					btn.doClick();
 			}
 			
 			JPanel pnlScaling = new JPanel();	
@@ -4886,7 +4913,7 @@ public class ImageDisplay extends JFrame {
 					parent = theNode;
 				}
 			}
-			model.reload();
+//			model.reload();
 		}
 		private Pixel[] addNewPixel(DefaultMutableTreeNode node, Pixel pix) {
 			Pixel[] oldPixels = (Pixel[]) node.getUserObject();
@@ -5047,7 +5074,12 @@ public class ImageDisplay extends JFrame {
 			return false;
 		}
 		public void fireNodeClicks() {
-			DefaultMutableTreeNode node = (DefaultMutableTreeNode) spotsPerFrame.getLastChild();
+			DefaultMutableTreeNode node;
+			try {
+				node = (DefaultMutableTreeNode) spotsPerFrame.getLastChild();
+			} catch(NoSuchElementException e) {
+				return;
+			}
 			TreePath path = new TreePath(node);
 			tree.setSelectionPath(path);
 			TreeSelectionEvent arg0 = new TreeSelectionEvent(node, null, null, null, null);
@@ -5115,9 +5147,15 @@ public class ImageDisplay extends JFrame {
 								color = new Color(255,0,255, 180);
 							}
 						} else
-							pixArray = new Pixel[] {(Pixel) userObject};
-						imagePanel.paintPixels(pixArray, color);
-						imagePanel.setCalculatedImage(false);
+							try {
+								pixArray = new Pixel[] {(Pixel) userObject};
+							} catch (ClassCastException e) {
+								pixArray = null;
+							}
+						if(pixArray != null) { 
+							imagePanel.paintPixels(pixArray, color);
+							imagePanel.setCalculatedImage(false);
+						}
 					}
 				} else if(userObject instanceof Pixel) {
 					imagePanel.paintPixels(new Pixel[] {(Pixel) userObject}, Color.green);
@@ -5790,7 +5828,7 @@ public class ImageDisplay extends JFrame {
 		private double[] coordsToQAndPhi(double x, double y) {
 			if(curCalib != null) 
 				return curCalib.coordsToQAndPhi(x, y);
-			
+
 			return Calibration.coordsToQAndPhi(x, y, pixSize, x0, y0, wavelength, sampleToDetector);
 		}
 		public double[][] getBackgroundData() { return backgroundData; }
@@ -5983,7 +6021,7 @@ public class ImageDisplay extends JFrame {
 			btnBetween.doClick(); 
 			btnEqual.doClick();
 			btnNotEqual.doClick();
-			btnPickAll.doClick();
+//			btnPickAll.doClick();
 			
 			setDefaultCloseOperation(HIDE_ON_CLOSE);
 			pack();
