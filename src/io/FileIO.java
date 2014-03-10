@@ -84,8 +84,8 @@ public class FileIO {
 			e.printStackTrace();
 		}
 		PrintStream ps = new PrintStream(fos);
-		ps.println("Pixel_x\t" + pix[0].getXCoordinate());
-		ps.println("Pixel_y\t" + pix[0].getYCoordinate());
+		ps.println("Pixel_x\t" + pix[0].getX());
+		ps.println("Pixel_y\t" + pix[0].getY());
 		for(int i = 0; i < pix.length; i++) {
 			ps.println(pix[i].getFrameNumber() + "\t" + pix[i].getIntensity());
 		}
@@ -112,8 +112,8 @@ public class FileIO {
 		String line2 = "Pixel_x\t";
 		String line3 = "Pixel_y\t";
 		for(int j = 0; j < pix[0].length; j++) {
-			line2 += pix[0][j].getXCoordinate() + "\t";
-			line3 += pix[0][j].getYCoordinate() + "\t";
+			line2 += pix[0][j].getX() + "\t";
+			line3 += pix[0][j].getY() + "\t";
 		}
 		ps.println(line1);
 		ps.println(line2);
@@ -155,7 +155,7 @@ public class FileIO {
 		String[] s = new String[pix.length + I[0].length + 1];
 		s[0] = "x\ty\t";
 		for(int i = 0; i < pix.length; i++) {
-			s[i+1] = pix[i].getXCoordinate() + "\t" + pix[i].getYCoordinate() + "\t";
+			s[i+1] = pix[i].getX() + "\t" + pix[i].getY() + "\t";
 		}
 		for(int i = 0; i < I.length; i++) {
 			s[0] += (i + "\t");
@@ -233,7 +233,7 @@ public class FileIO {
 		String s4 = "Spot Avg Y\t";
 		String s5 = "Total spot intensity\t";
 		for(int i = 0; i < spots.size(); i++) {
-			spots.get(i).calculateSpotProperties();
+			spots.get(i).calculateSpotProperties(null);
 			s1 += spots.get(i).getSpotNumber() + "\t";
 			s2 += spots.get(i).getNumPixels() + "\t";
 			s3 += spots.get(i).getX() + "\t";

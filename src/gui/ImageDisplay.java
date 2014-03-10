@@ -963,7 +963,7 @@ public class ImageDisplay extends JFrame {
 							for(int i = 0; i < thePix.length; i++) {
 								FileIO.writeToFileXYI(thePix[i], new File(output + "_region" + i + suffix));
 								spot = new Spot(thePix[i]);
-								spot.calculateSpotProperties();
+								spot.calculateSpotProperties(curCalib);
 								mps.println(spot);
 							}
 						};
@@ -975,7 +975,7 @@ public class ImageDisplay extends JFrame {
 							for(int i = 0; i < thePix.length; i++) {
 								FileIO.writeToFileXYI(thePix[i], new File(output + "_spot" + i + suffix));
 								spot = new Spot(thePix[i]);
-								spot.calculateSpotProperties();
+								spot.calculateSpotProperties(curCalib);
 								mps.println(spot);
 							}
 						}
@@ -984,6 +984,18 @@ public class ImageDisplay extends JFrame {
 						if(thePix != null) {
 							for(int i = 0; i < thePix.length; i++) {
 								FileIO.writeToFileXYI(thePix[i], new File(output + "_path" + i + suffix));
+							}
+						}
+						// output target spots
+						thePix = selectionPanel.getTargetSpots();
+						if(thePix != null) {
+							Spot spot;
+							mps.println("Target Spots");
+							for(int i = 0; i < thePix.length; i++) {
+								FileIO.writeToFileXYI(thePix[i], new File(output + "_region" + i + suffix));
+								spot = new Spot(thePix[i]);
+								spot.calculateSpotProperties(curCalib);
+								mps.println(spot);
 							}
 						}
 						mps.close();
@@ -1015,8 +1027,8 @@ public class ImageDisplay extends JFrame {
 			for(Pixel pix : arr) {
 				Icur = pix.getIntensity();
 				ITot += Icur;
-				x += pix.getXCoordinate() * Icur;
-				y += pix.getYCoordinate() * Icur;
+				x += pix.getX() * Icur;
+				y += pix.getY() * Icur;
 				q += pix.getDist() * Icur;
 				phi += pix.getPhi() * Icur;
 			}
@@ -1523,8 +1535,8 @@ public class ImageDisplay extends JFrame {
 			double totalI = 0;
 			int x, y, i;
 			for(i = 0; i < curPix.length; i++) {
-				x = curPix[i].getXCoordinate();
-				y = curPix[i].getYCoordinate();
+				x = curPix[i].getX();
+				y = curPix[i].getY();
 				I[i] = data[x][y];
 				totalI += I[i];
 				avgX += x*I[i];
@@ -1546,8 +1558,8 @@ public class ImageDisplay extends JFrame {
 			double avgX=0, avgY=0;
 			double I=0;
 			for(i = 0; i < curPix.length; i++) {
-				x = curPix[i].getXCoordinate();
-				y = curPix[i].getYCoordinate();
+				x = curPix[i].getX();
+				y = curPix[i].getY();
 				I += data[x][y];
 				avgX += x*data[x][y];
 				avgY += y*data[x][y];
@@ -2724,8 +2736,8 @@ public class ImageDisplay extends JFrame {
 			Rectangle[] toDraw = new Rectangle[toPaint.length];
 			for(int i = 0; i < toPaint.length; i++) {
 //				System.out.println(i);
-				curPoint.x = toPaint[i].getXCoordinate();
-				curPoint.y = toPaint[i].getYCoordinate();
+				curPoint.x = toPaint[i].getX();
+				curPoint.y = toPaint[i].getY();
 				if(colorPermanent) {
 					if(color == null) {
 						color = c1;
@@ -3935,7 +3947,7 @@ public class ImageDisplay extends JFrame {
 				boolean alreadyPresent = false;
 				for(int i = 0; i < duplicatesRemoved.size() && !alreadyPresent; i++) {
 					pix2 = duplicatesRemoved.get(i);
-					if(pix1.getXCoordinate() == pix2.getXCoordinate() && pix1.getYCoordinate() == pix2.getYCoordinate()) {
+					if(pix1.getX() == pix2.getX() && pix1.getY() == pix2.getY()) {
 						alreadyPresent = true;
 					}
 				}
@@ -4003,8 +4015,8 @@ public class ImageDisplay extends JFrame {
 			Pixel[] spotPixels = currentSpot.getPixels();
 			int x, y;
 			for(int i = 0; i < spotPixels.length; i++) {
-				x = spotPixels[i].getXCoordinate() - currentPixel.getXCoordinate();
-				y = spotPixels[i].getYCoordinate() - currentPixel.getYCoordinate();
+				x = spotPixels[i].getX() - currentPixel.getX();
+				y = spotPixels[i].getY() - currentPixel.getY();
 				if(Math.abs(x) <= 1 && Math.abs(y) <= 1) { return true; }
 			}
 			
@@ -5434,7 +5446,7 @@ public class ImageDisplay extends JFrame {
 					imagePanel.setShape(imagePanel.imageClickListener.path);
 					Pixel[] p = imagePanel.getPixelsUnderLine();
 					for(Pixel pix : p) {
-						Point point = new Point(pix.getXCoordinate(), pix.getYCoordinate());
+						Point point = new Point(pix.getX(), pix.getY());
 						double val = 0;
 						double[][] data = imagePanel.imageData;
 						switch(coordsPanel.coords) {

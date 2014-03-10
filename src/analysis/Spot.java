@@ -17,6 +17,7 @@ import java.util.LinkedList;
 import java.util.ListIterator;
 import java.util.Vector;
 
+import calculate.Calibration;
 import Lists.Pair;
 
 
@@ -90,16 +91,23 @@ public class Spot implements Serializable {
 	 * Method to determine the total intensity of the spot and calculate the intensity-weighted average 
 	 * x- and y-coordinates.
 	 */
-	public void calculateSpotProperties() {
+	public void calculateSpotProperties(Calibration calib) {
 		double curI;
 		Pixel curPix;
 		x = y = I = 0;
+		double[] qPhi;
 		for(int i = 0; i < spot.size(); i++) {
 			 curPix = spot.elementAt(i);
+			 if(calib == null)
+				 qPhi = new double[] {0, 0};
+			 else
+				 qPhi = calib.coordsToQAndPhi(curPix.getX(), curPix.getY());
+			 curPix.setDist(qPhi[0]);
+			 curPix.setPhi(qPhi[1]);
 			 curI = curPix.getIntensity();
 			 I += curI;
-			 x += curPix.getYCoordinate() * curI;
-			 y += curPix.getXCoordinate() * curI;
+			 x += curPix.getY() * curI;
+			 y += curPix.getX() * curI;
 			 phi += curPix.getPhi() * curI;
 			 q += curPix.getDist() * curI;
 		}
@@ -116,7 +124,7 @@ public class Spot implements Serializable {
 	 * @return A double holding the intensity-weighted average x-coordinate
 	 */
 	public double getX() {
-		if(x == 0) { calculateSpotProperties(); }
+		if(x == 0) { calculateSpotProperties(null); }
 		return x; 
 	}
 	
@@ -125,7 +133,7 @@ public class Spot implements Serializable {
 	 * @return A double holding the intensity-weighted average y-coordinate
 	 */
 	public double getY() { 
-		if(y == 0) { calculateSpotProperties(); }
+		if(y == 0) { calculateSpotProperties(null); }
 		return y; 
 	}
 	
@@ -134,7 +142,7 @@ public class Spot implements Serializable {
 	 * @return	A double containing the total intensity for the spot
 	 */
 	public double getI() { 
-		if(I == 0) { calculateSpotProperties(); }
+		if(I == 0) { calculateSpotProperties(null); }
 		return I; 
 	}
 	

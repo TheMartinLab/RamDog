@@ -70,13 +70,13 @@ public class Pixel implements Serializable, Cloneable, Comparable {
 	 * Getter method to return the x-coordinate of the pixel
 	 * @return An integer containing the x-coordinate
 	 */
-	public int getXCoordinate() { return x; }
+	public int getX() { return x; }
 	
 	/**
 	 * Getter method to return the y-coordinate of the pixel
 	 * @return An integer containing the y-coordinate
 	 */
-	public int getYCoordinate()	{ return y;	}
+	public int getY()	{ return y;	}
 	public void setX(int x) { this.x = x; }
 	public void setY(int y) { this.y = y; }
 	/**
@@ -135,8 +135,6 @@ public class Pixel implements Serializable, Cloneable, Comparable {
 	public void setDist(double dist) { this.dist = dist; }
 	public double getPhi() { return phi; }
 	public void setPhi(double phi) { this.phi = phi; }
-	public int getX() { return x; }
-	public int getY() { return y; }
 	public void setIntensity(double intensity) { this.intensity = intensity; }
 	public void setFrameNumber(int frameNumber) { this.frameNumber = frameNumber; }
 }
