@@ -11,8 +11,6 @@
  ******************************************************************************/
 package dataFileTypes;
 
-import java.io.File;
-import java.util.Iterator;
 import java.util.Vector;
 
 public class CalculatedXrayCollection {

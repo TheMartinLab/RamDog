@@ -13,7 +13,6 @@ package image;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -30,7 +29,6 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import dataFileTypes.ASC;
 import dataFileTypes.BIN;
 import dataFileTypes.ImageFile;
 import dataFileTypes.ImageProperties;

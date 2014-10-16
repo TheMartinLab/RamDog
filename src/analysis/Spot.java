@@ -13,12 +13,10 @@ package analysis;
 import geometry.JVector;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Vector;
 
-import calculate.Calibration;
 import Lists.Pair;
+import calculate.Calibration;
 
 
 /**

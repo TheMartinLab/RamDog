@@ -19,9 +19,7 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import masks.SavGol2ndDer;
-
 import analysis.ApplyFilter;
-
 import equations_1d.Avrami;
 import equations_1d.Equation1;
 import equations_2d.Equation2;
