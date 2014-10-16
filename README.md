@@ -5,7 +5,7 @@ A graphical user interface program to interactively analyze 2D Diffraction Image
 
 Currently requires https://github.com/ericdill/GlobalPackages 
 
-See "src/Ramdog Help&Tutorial.docx" for usage instructions.
+See the [manual] (https://github.com/TheMartinLab/RamDog/raw/master/doc/Manual.pdf) for usage instructions.
 
 Run the program via command line "java -jar Ramdog.jar" or by double clicking on the downloaded file.
 
