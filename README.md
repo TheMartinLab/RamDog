@@ -62,7 +62,7 @@ Development
 Currently requires https://github.com/ericdill/GlobalPackages 
 
 This source code can be loaded into the Eclipse IDE with the EGit addon.  Once synchronized, run 
-the "ImageDisplay.java" file to pull up the GUI for 2D X-ray image analysis.  
+`src/gui/ImageDisplay.java` to pull up the GUI for 2D X-ray image analysis.  
 
 Further reading
 ---------------
