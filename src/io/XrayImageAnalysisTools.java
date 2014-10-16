@@ -67,12 +67,6 @@ public class XrayImageAnalysisTools {
 		
 		return spots.toArray(new Spot[spots.size()]);
 	}
-	public JVector determineImageProjection(Spot[] spots) {
-		// TODO
-		double[][] actualAngles, assignedAngles;
-		actualAngles = new double[spots.length][spots.length];
-		assignedAngles = new double[spots.length][spots.length];
-	}
 	public void determineReflectionFamily(Spot[] spots) {
 		int familyIdx;
 		
