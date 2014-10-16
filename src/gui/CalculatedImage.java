@@ -33,6 +33,7 @@ import javax.swing.JTextField;
 
 public class CalculatedImage extends JPanel implements MouseMotionListener, MouseWheelListener {
 
+	private static final long serialVersionUID = 2834732043531881969L;
 	/* *************** */
 	/* IMAGE VARIABLES */
 	/* *************** */

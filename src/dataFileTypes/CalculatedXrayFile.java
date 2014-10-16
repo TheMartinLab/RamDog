@@ -232,8 +232,6 @@ public class CalculatedXrayFile {
 		maxY = -1 * minY;
 		
 		midPoint = new Point2D.Double(maxX, maxY);
-		int numX2 = (int) Math.rint(2*(qMaxX/qStep))+1;
-		int numY2 = (int) Math.rint(2*(qMaxY/qStep))+1;
 		int numX = maxX - minX+1;
 		int numY = maxY - minY+1;
 		

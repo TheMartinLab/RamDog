@@ -91,21 +91,19 @@ public class ImageProperties {
 		
 		if(dataSizes == null)
 			return estimateWithoutDataSizes(f);
-		
-		return null;
+
+		throw new UnsupportedOperationException("estimateFileProperties in ImageProperties.java is not yet implemented");
 	}
 	
 	private int[] estimateWithoutFileDims(File f) {
 		long fileBytes = f.length();
-		
-		return null;
-		
+
+		throw new UnsupportedOperationException("estimateWithoutFileDims in ImageProperties.java is not yet implemented");
 	}
 	
 	private int[] estimateWithoutDataSizes(File f) {
 		long fileBytes = f.length();
-		
-		return null;
+		throw new UnsupportedOperationException("estimateWithoutDataSizes in ImageProperties.java is not yet implemented");
 	}
 	
 	private void parseCommonProperties() {
