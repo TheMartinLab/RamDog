@@ -1,18 +1,7 @@
 RamDog
 ======
 
-A graphical user interface program to interactively analyze 2D Diffraction Images. Initial project setup; bugs throughout the software exist. Development in progress, use at own risk! Contact: (Developer) Dr. Eric Dill eddill@ncsu.edu; (Principal Investigator) Dr. James Martin martinjd@ncsu.edu
-
-Currently requires https://github.com/ericdill/GlobalPackages 
-
-See "src/Ramdog Help&Tutorial.docx" for usage instructions.
-
-Run the program via command line "java -jar Ramdog.jar" or by double clicking on the downloaded file.
-
-Alternatively, you can load this into an instance of the Eclipse IDE with the EGit addon.  Once synchronized, run the "ImageDisplay.java" file to pull up the GUI for 2D X-ray image analysis.  
-
-** The 2D Fourier Transform currently only works on windows with a CUDA-capable GPU installed.  You may also need to compile the *.dll **
-
+A graphical user interface program to interactively analyze 2D Diffraction Images. 
 
 What can this software do?
 --------------------------
@@ -48,4 +37,34 @@ What can this software do?
     - A specific region centered on the image center
   - Compute 2D Fourier transforms of a series of diffraction images and output as .png images
   - Output the data from the selected regions of a 2D diffraction image for a series of 2D diffraction images
+
+Disclaimer
+----------
+Critical bugs throughout the software may exist, please submit a [Pull Request](https://github.com/TheMartinLab/RamDog/pulls) or a [bug report](https://github.com/TheMartinLab/RamDog/issues) if you find any!
+
+Please submit [new features](https://github.com/TheMartinLab/RamDog/issues) that you wish to see
+
+Development in progress, use at own risk! Contact: (Developer) Dr. Eric Dill edill@bnl.gov; 
+(Principal Investigator) Dr. James Martin martinjd@ncsu.edu
+
+Installation
+------------
+Requires Java Runtime Environment v1.7
+
+See the [releases page](https://github.com/TheMartinLab/RamDog/releases) for an executable (jar).
+
+Run the program via command line `java -jar Ramdog.jar` or by double clicking on the downloaded file.
+
+**The 2D Fourier Transform currently only works on windows with a CUDA-capable GPU installed.  You may also need to compile the .dll**
+
+Development
+-----------
+Currently requires https://github.com/ericdill/GlobalPackages 
+
+This source code can be loaded into the Eclipse IDE with the EGit addon.  Once synchronized, run 
+`src/gui/ImageDisplay.java` to pull up the GUI for 2D X-ray image analysis.  
+
+Further reading
+---------------
+See the [manual](https://github.com/TheMartinLab/RamDog/raw/master/doc/Manual.pdf) for usage instructions.
 
