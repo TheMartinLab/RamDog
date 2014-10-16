@@ -139,6 +139,7 @@ public class XrayGUI extends JFrame {
 				setLayout(new GridLayout(2, 0));
 				btnGroup = new ButtonGroup();
 			}
+			@Override
 			public void setEnabled(boolean enable) {
 				Enumeration<AbstractButton> group = btnGroup.getElements();
 				btnGroup.clearSelection();

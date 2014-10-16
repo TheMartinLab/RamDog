@@ -12,9 +12,7 @@
 package analysis;
 
 import java.awt.Point;
-import java.util.Vector;
 
-import masks.Mask;
 import masks.SavGol2ndDer;
 
 public class PixelAnalysis {

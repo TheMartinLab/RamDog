@@ -12,7 +12,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -27,8 +26,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-import dataFileTypes.CalculatedXrayFile;
 import uiComponents.DataTypeChecker;
+import dataFileTypes.CalculatedXrayFile;
 
 public class CalculatedImagePanel extends Observable {
 

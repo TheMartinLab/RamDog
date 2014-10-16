@@ -44,13 +44,34 @@ package color;
 
 import gui.ImageDisplay;
 
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.Vector;
 
-import javax.swing.*;
-import javax.swing.event.*;
-import javax.swing.table.DefaultTableModel;
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JColorChooser;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.TableCellRenderer;
 import javax.swing.table.TableColumn;
 import javax.swing.table.TableModel;
@@ -127,8 +148,8 @@ public class ColorChooser extends JPanel
     
     public void initScrollPaneForTable() {
     	scrollPane = new JScrollPane(table);
-    	scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    	scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    	scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
     public Component getButtons() {
     	JButton btnUp = new JButton("Move Up");
@@ -325,7 +346,8 @@ public class ColorChooser extends JPanel
     private int getSelectedLevelIdx() {
     	return table.getSelectedRow();
     }
-    public void stateChanged(ChangeEvent e) {
+    @Override
+	public void stateChanged(ChangeEvent e) {
         int rowIdx = getSelectedLevelIdx();
         colors.remove(rowIdx);
         colors.add(rowIdx, jcc.getColor());
@@ -344,7 +366,7 @@ public class ColorChooser extends JPanel
         if(standAlone)
         	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         else
-        	frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        	frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
         //Create and set up the content pane.
         ColorChooser chooser = new ColorChooser();
@@ -369,7 +391,8 @@ public class ColorChooser extends JPanel
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 createAndShowGUI(true);
             }
         });

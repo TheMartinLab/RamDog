@@ -15,14 +15,31 @@ Swing, Second Edition
 by Matthew Robinson, Pavel Vorobiev
 
 */
-import java.awt.*;
-import java.awt.event.*;
-import java.io.*;
-import java.util.*;
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.io.File;
+import java.util.Vector;
 
-import javax.swing.*;
-import javax.swing.tree.*;
-import javax.swing.event.*;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollPane;
+import javax.swing.JTextField;
+import javax.swing.JTree;
+import javax.swing.SwingUtilities;
+import javax.swing.UIManager;
+import javax.swing.event.TreeExpansionEvent;
+import javax.swing.event.TreeExpansionListener;
+import javax.swing.event.TreeSelectionEvent;
+import javax.swing.event.TreeSelectionListener;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeCellRenderer;
+import javax.swing.tree.TreePath;
+import javax.swing.tree.TreeSelectionModel;
 
 public class FileTree 
   extends JScrollPane 
@@ -103,7 +120,8 @@ public class FileTree
     // only occurs within the event dispatching thread.
     class DirExpansionListener implements TreeExpansionListener
     {
-        public void treeExpanded(TreeExpansionEvent event)
+        @Override
+		public void treeExpanded(TreeExpansionEvent event)
         {
             final DefaultMutableTreeNode node = getTreeNode(
                 event.getPath());
@@ -111,13 +129,15 @@ public class FileTree
 
             Thread runner = new Thread() 
             {
-              public void run() 
+              @Override
+			public void run() 
               {
                 if (fnode != null && fnode.expand(node)) 
                 {
                   Runnable runnable = new Runnable() 
                   {
-                    public void run() 
+                    @Override
+					public void run() 
                     {
                        m_model.reload(node);
                     }
@@ -129,14 +149,16 @@ public class FileTree
             runner.start();
         }
 
-        public void treeCollapsed(TreeExpansionEvent event) {}
+        @Override
+		public void treeCollapsed(TreeExpansionEvent event) {}
     }
 
 
   class DirSelectionListener 
     implements TreeSelectionListener 
   {
-    public void valueChanged(TreeSelectionEvent event)
+    @Override
+	public void valueChanged(TreeSelectionEvent event)
     {
       DefaultMutableTreeNode node = getTreeNode(
         event.getPath());
@@ -179,7 +201,8 @@ class IconCellRenderer
     setOpaque(false);
   }
 
-  public Component getTreeCellRendererComponent(JTree tree, 
+  @Override
+public Component getTreeCellRendererComponent(JTree tree, 
     Object value, boolean sel, boolean expanded, boolean leaf, 
     int row, boolean hasFocus) 
     
@@ -212,7 +235,8 @@ class IconCellRenderer
     return this;
   }
     
-  public void paintComponent(Graphics g) 
+  @Override
+public void paintComponent(Graphics g) 
   {
     Color bColor = getBackground();
     Icon icon = getIcon();
@@ -268,7 +292,8 @@ class IconData
     return m_data;
   }
 
-  public String toString() 
+  @Override
+public String toString() 
   { 
     return m_data.toString();
   }
@@ -288,7 +313,8 @@ class FileNode
     return m_file;
   }
 
-  public String toString() 
+  @Override
+public String toString() 
   { 
     return m_file.getName().length() > 0 ? m_file.getName() : 
       m_file.getPath();

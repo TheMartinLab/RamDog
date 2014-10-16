@@ -21,11 +21,11 @@ import java.io.File;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ButtonGroup;
-import javax.swing.JToggleButton;
 import javax.swing.JFileChooser;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.JToggleButton;
 
 public class ImagePropertiesViewer extends JPanel implements PropertyChangeListener {
 

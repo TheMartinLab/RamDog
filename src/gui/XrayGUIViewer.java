@@ -29,7 +29,8 @@ public class XrayGUIViewer {
 		}
 		
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 new XrayGUI();
             }
         });

@@ -35,6 +35,7 @@ public class CalculatedXrayFile {
 	private int numFilesPerImage = 1;
 	private int numCalculationsPerFile = 1;
 	
+	@Override
 	public String toString() {
 		int maxLen = Math.min(25, file.getName().length());
 		return file.getName().substring(0, maxLen);
@@ -65,7 +66,7 @@ public class CalculatedXrayFile {
 					aProjection.add(vec);
 				}
 				if(aProjection.size() == 3) {
-					JVector[] arr = (JVector[]) aProjection.toArray(new JVector[aProjection.size()]);
+					JVector[] arr = aProjection.toArray(new JVector[aProjection.size()]);
 					projections.add(arr);
 					aProjection.clear();
 					numFilesPerImage++;
@@ -231,8 +232,6 @@ public class CalculatedXrayFile {
 		maxY = -1 * minY;
 		
 		midPoint = new Point2D.Double(maxX, maxY);
-		int numX2 = (int) Math.rint(2*(qMaxX/qStep))+1;
-		int numY2 = (int) Math.rint(2*(qMaxY/qStep))+1;
 		int numX = maxX - minX+1;
 		int numY = maxY - minY+1;
 		

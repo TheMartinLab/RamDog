@@ -12,7 +12,6 @@
 package analysis;
 
 import java.io.Serializable;
-import java.util.Vector;
 
 public class CorrelatedSpots implements Serializable{
 

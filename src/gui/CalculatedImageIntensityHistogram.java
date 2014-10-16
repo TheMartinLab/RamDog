@@ -15,6 +15,8 @@ import javax.swing.JPanel;
 
 public class CalculatedImageIntensityHistogram extends JPanel {
 
+	private static final long serialVersionUID = 91734848597079355L;
+
 	public CalculatedImageIntensityHistogram() {
 		
 	}

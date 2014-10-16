@@ -40,6 +40,7 @@ public class BIN implements ImageFile {
 		bytesToSkip = prop.getHeaderSize();
 		endianType = prop.getEndianType();
 	}
+	@Override
 	public double[][] readFile(File aFile) {
 		return readFile(aFile, new int[] {0, 0, rows, columns});
 	}
@@ -74,7 +75,7 @@ public class BIN implements ImageFile {
 			}
 			for(int j = x0; j < x1; j++) {
 				for(int b = 0; b < bytesPerEntry; b++) {
-					theBytes[b] = (byte) (buffer[bytesPerEntry*j+b]);
+					theBytes[b] = (buffer[bytesPerEntry*j+b]);
 				}
 
 				switch(endianType) {

@@ -14,7 +14,6 @@ package gui;
 import geometry.JVector;
 
 import java.awt.Color;
-import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -34,6 +33,7 @@ import javax.swing.JTextField;
 
 public class CalculatedImage extends JPanel implements MouseMotionListener, MouseWheelListener {
 
+	private static final long serialVersionUID = 2834732043531881969L;
 	/* *************** */
 	/* IMAGE VARIABLES */
 	/* *************** */
@@ -101,8 +101,8 @@ public class CalculatedImage extends JPanel implements MouseMotionListener, Mous
 		
 	}
 	private Point viewCoordsToImageCoords(Point p) {
-		int newx1 = zoomX1 + (int) Math.rint(((double) zoomX2 - (double) zoomX1) / ((double)viewWidth) * (double) p.x);
-		int newy1 = zoomY1 + (int) Math.rint(((double) zoomY2 - (double) zoomY1) / ((double)viewHeight) * (double) p.y);
+		int newx1 = zoomX1 + (int) Math.rint(((double) zoomX2 - (double) zoomX1) / (viewWidth) * p.x);
+		int newy1 = zoomY1 + (int) Math.rint(((double) zoomY2 - (double) zoomY1) / (viewHeight) * p.y);
 		
 		return new Point(newx1, newy1);
 	}

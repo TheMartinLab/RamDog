@@ -11,21 +11,16 @@
  ******************************************************************************/
 package io;
 
+import geometry.JVector;
 import io.BraggToAtomsINP.ColorMethod;
 
 import java.awt.Color;
 import java.io.File;
-import java.util.LinkedList;
 import java.util.Scanner;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.Vector;
 
-import Lists.DoubleLinkedListVector;
 import Lists.Pair;
-import Lists.TwoNodeVector;
 import analysis.Spot;
-import geometry.JVector;
 
 public class XrayImageAnalysisTools {
 
@@ -66,12 +61,6 @@ public class XrayImageAnalysisTools {
 		}
 		
 		return spots.toArray(new Spot[spots.size()]);
-	}
-	public JVector determineImageProjection(Spot[] spots) {
-		// TODO
-		double[][] actualAngles, assignedAngles;
-		actualAngles = new double[spots.length][spots.length];
-		assignedAngles = new double[spots.length][spots.length];
 	}
 	public void determineReflectionFamily(Spot[] spots) {
 		int familyIdx;

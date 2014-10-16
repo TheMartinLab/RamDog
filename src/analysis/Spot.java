@@ -13,12 +13,10 @@ package analysis;
 import geometry.JVector;
 
 import java.io.Serializable;
-import java.util.LinkedList;
-import java.util.ListIterator;
 import java.util.Vector;
 
-import calculate.Calibration;
 import Lists.Pair;
+import calculate.Calibration;
 
 
 /**
@@ -152,6 +150,7 @@ public class Spot implements Serializable {
 	 * Return a tab-delimited string containing the intensity-weighted average x- and y-coordinates and the
 	 * total intensity
 	 */
+	@Override
 	public String toString() {
 		return x + "\t" + y + "\t" + I + "\t" + q + "\t" + phi;
 	}

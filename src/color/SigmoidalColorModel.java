@@ -13,13 +13,10 @@ package color;
 
 import java.awt.Color;
 import java.awt.image.ColorModel;
-import java.util.Iterator;
 import java.util.Vector;
 
 import equations.Avrami;
 import equations.Equation;
-
-import Lists.Pair;
 
 public class SigmoidalColorModel extends ColorModel {
 

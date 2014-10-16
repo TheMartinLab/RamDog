@@ -114,10 +114,11 @@ public class Pixel implements Serializable, Cloneable, Comparable {
 	@Override
 	public String toString() { return frameNumber + "\t" + x + "\t" + y + "\t" + phi + "\t" + dist + "\t" + intensity; }
 	
+	@Override
 	public Object clone() {
 		Pixel p = new Pixel(x, y, intensity, frameNumber);
 		p.frameNumber = frameNumber;
-		return (Object) p;
+		return p;
 	}
 
 	@Override
