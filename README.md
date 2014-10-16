@@ -1,5 +1,6 @@
 RamDog
 ======
+[![DOI](https://zenodo.org/badge/6651/TheMartinLab/RamDog.png)](http://dx.doi.org/10.5281/zenodo.12268)
 
 A graphical user interface program to interactively analyze 2D Diffraction Images. 
 
