@@ -88,8 +88,11 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JToggleButton;
 import javax.swing.JTree;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
+import javax.swing.WindowConstants;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 import javax.swing.event.TreeSelectionEvent;
@@ -177,10 +180,12 @@ public class ImageDisplay extends JFrame {
 	
 	public ImageDisplay() {
 		txtFieldFocusListener = new FocusListener() {
+			@Override
 			public void focusGained(FocusEvent e) {
 				JTextField txt = (JTextField) e.getSource();
 				txt.selectAll();
 			}
+			@Override
 			public void focusLost(FocusEvent e) {}
 		};
 		setLayout(new BorderLayout());
@@ -367,6 +372,7 @@ public class ImageDisplay extends JFrame {
 		});
 		JMenuItem spotPickSeries = new JMenuItem("Spot pick a series of images");
 		spotPickSeries.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				System.out.println("Spot pick series button clicked.");
 			}
@@ -464,6 +470,7 @@ public class ImageDisplay extends JFrame {
 		btnZoomReset.addActionListener(new ResetZoomListener());
 		btnResetImage = new JButton("Reload Image");
 		btnResetImage.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				imagePanel.reloadImage();
 			}
@@ -472,6 +479,7 @@ public class ImageDisplay extends JFrame {
 		JButton btnPrevious = new JButton("Previous image");
 		
 		btnPrevious.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(imagePanel.curFileIdx > 0) {
 					imagePanel.curFileIdx--;
@@ -481,6 +489,7 @@ public class ImageDisplay extends JFrame {
 		});
 		JButton btnNext = new JButton("Next Image");
 		btnNext.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				if(imagePanel.curFileIdx > 0) {
 					imagePanel.curFileIdx++;
@@ -490,6 +499,7 @@ public class ImageDisplay extends JFrame {
 		});
 		JButton btnFT = new JButton("Fourier Transform");
 		btnFT.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				imagePanel.fourierTransform();
 			}
@@ -525,7 +535,8 @@ public class ImageDisplay extends JFrame {
 	        ex.printStackTrace();
 	    }
 		javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 new ImageDisplay();
             }
         });
@@ -588,6 +599,7 @@ public class ImageDisplay extends JFrame {
 			btnLoadAtomsFile = new JMenuItem("Setup Bragg Reflection Calculation");
 			btnLoadAtomsFile.addActionListener(new ActionListener() {
 
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					calcFrame.setVisible(true);
 				}
@@ -614,7 +626,7 @@ public class ImageDisplay extends JFrame {
 		}
 		private void initSaveMenu() {
 			frameSave = new JFrame();
-			frameSave.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+			frameSave.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 			final JToggleButton btnAll = new JToggleButton("Select Entire Image");
 			final JToggleButton btnRegion = new JToggleButton("Select Specific Region");
 			final JToggleButton btnFromCenter = new JToggleButton("Select Region From Image Center");
@@ -1709,7 +1721,7 @@ public class ImageDisplay extends JFrame {
 			private void setup() {
 				txt = new JTextArea();
 				txt.setEditable(false);
-				JScrollPane scroll = new JScrollPane(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+				JScrollPane scroll = new JScrollPane(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED, ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
 				scroll.setViewportView(txt);
 				JPanel pnlMain = new JPanel();
 				pnlMain.setLayout(new BoxLayout(pnlMain, BoxLayout.Y_AXIS));
@@ -2578,9 +2590,9 @@ public class ImageDisplay extends JFrame {
 					viewHeight = getHeight();
 					viewWidth = getWidth();
 					if(viewHeight < viewWidth) {
-						viewWidth = (int) (Math.rint(((double) viewHeight) / xyRatio));
+						viewWidth = (int) (Math.rint((viewHeight) / xyRatio));
 					} else {
-						viewHeight = (int) (Math.rint(((double) viewWidth) * xyRatio));
+						viewHeight = (int) (Math.rint((viewWidth) * xyRatio));
 					}
 				} else {
 					viewWidth = getWidth();
@@ -2594,6 +2606,7 @@ public class ImageDisplay extends JFrame {
 //			}
 			return new Dimension(viewWidth, viewHeight);
 		}
+		@Override
 		public void paint(Graphics g) {
 			Dimension d = getDimensions();
 			viewWidth = d.width;
@@ -2899,7 +2912,7 @@ public class ImageDisplay extends JFrame {
 			double median = 0;
 			if(size%2 == 0) {
 				int idx = size/2;
-				median = ((double) (sortedVals[idx] + sortedVals[idx+1]) )/ 2.;
+				median = (sortedVals[idx] + sortedVals[idx+1] )/ 2.;
 			} else {
 				int idx = size/2;
 				median = sortedVals[idx];
@@ -3207,20 +3220,20 @@ public class ImageDisplay extends JFrame {
 			}
 		}
 		private Point viewCoordsToImageCoords(Point p) {
-			int newx1 = zoomX1 + (int) Math.rint(((double) zoomX2 - (double) zoomX1) / ((double)viewWidth) * (double) p.x);
-			int newy1 = zoomY1 + (int) Math.rint(((double) zoomY2 - (double) zoomY1) / ((double)viewHeight) * (double) p.y);
+			int newx1 = zoomX1 + (int) Math.rint(((double) zoomX2 - (double) zoomX1) / (viewWidth) * p.x);
+			int newy1 = zoomY1 + (int) Math.rint(((double) zoomY2 - (double) zoomY1) / (viewHeight) * p.y);
 			
 			return new Point(newx1, newy1);
 		}
 		private Point2D.Double viewCoordsToImageCoords(Point2D.Double p) {
-			double newx1 = zoomX1 + ((double) zoomX2 - (double) zoomX1) / ((double)viewWidth) * (double) p.x;
-			double newy1 = zoomY1 + ((double) zoomY2 - (double) zoomY1) / ((double)viewHeight) * (double) p.y;
+			double newx1 = zoomX1 + ((double) zoomX2 - (double) zoomX1) / (viewWidth) * p.x;
+			double newy1 = zoomY1 + ((double) zoomY2 - (double) zoomY1) / (viewHeight) * p.y;
 			
 			return new Point2D.Double(newx1, newy1);
 		}
 		private Point imageCoordsToViewCoords(Point p) {
-			int newx1 = (int) Math.rint( ( (double) (p.x - zoomX1) ) / ( (double) (zoomX2 - zoomX1) ) * (double) viewWidth);
-			int newy1 = (int) Math.rint( ( (double) (p.y - zoomY1) ) / ( (double) (zoomY2 - zoomY1) ) * (double) viewHeight);
+			int newx1 = (int) Math.rint( ( (double) (p.x - zoomX1) ) / ( (double) (zoomX2 - zoomX1) ) * viewWidth);
+			int newy1 = (int) Math.rint( ( (double) (p.y - zoomY1) ) / ( (double) (zoomY2 - zoomY1) ) * viewHeight);
 			
 			return new Point(newx1, newy1);
 		}
@@ -4117,6 +4130,7 @@ public class ImageDisplay extends JFrame {
 	}
 	class ImageMouseWheelListener implements MouseWheelListener {
 		private double increment = .05;
+		@Override
 		public void mouseWheelMoved(MouseWheelEvent e) {
 			int direction = e.getWheelRotation();
 			Point point = e.getPoint();
@@ -4298,6 +4312,7 @@ public class ImageDisplay extends JFrame {
 			ButtonGroup grpImageOrClick = new ButtonGroup();
 
 			ActionListener al_clickType = new ActionListener(){
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					if(arg0.getSource() instanceof JToggleButton) {
 						JToggleButton btn = (JToggleButton) arg0.getSource();
@@ -4343,6 +4358,7 @@ public class ImageDisplay extends JFrame {
 
 			
 			ActionListener al_scaling = new ActionListener(){
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					if(arg0.getSource() instanceof JToggleButton) {
 						JToggleButton btn = (JToggleButton) arg0.getSource();
@@ -4352,6 +4368,7 @@ public class ImageDisplay extends JFrame {
 			};
 			
 			ActionListener al_range = new ActionListener(){
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					if(arg0.getSource() instanceof JToggleButton) {
 						JToggleButton btn = (JToggleButton) arg0.getSource();
@@ -4362,6 +4379,7 @@ public class ImageDisplay extends JFrame {
 
 			
 			ActionListener al_filtering = new ActionListener(){
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					if(arg0.getSource() instanceof JToggleButton) {
 						JToggleButton btn = (JToggleButton) arg0.getSource();
@@ -4423,6 +4441,7 @@ public class ImageDisplay extends JFrame {
 			pnlRangeButtons.add(btnNoLimit);
 			
 			btnGreaterThan.addActionListener(new ActionListener()  {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JToggleButton btn = (JToggleButton) e.getSource();
 					imagePanel.setFilterRange(imageFilterRange.valueOf(btn.getText()));
@@ -4432,6 +4451,7 @@ public class ImageDisplay extends JFrame {
 				}
 			});
 			btnLessThan.addActionListener(new ActionListener()  {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JToggleButton btn = (JToggleButton) e.getSource();
 					imagePanel.setFilterRange(imageFilterRange.valueOf(btn.getText()));
@@ -4441,6 +4461,7 @@ public class ImageDisplay extends JFrame {
 				}
 			});
 			btnBetween.addActionListener(new ActionListener()  {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JToggleButton btn = (JToggleButton) e.getSource();
 					imagePanel.setFilterRange(imageFilterRange.valueOf(btn.getText()));
@@ -4451,6 +4472,7 @@ public class ImageDisplay extends JFrame {
 				}
 			});
 			btnEqualTo.addActionListener(new ActionListener()  {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JToggleButton btn = (JToggleButton) e.getSource();
 					imagePanel.setFilterRange(imageFilterRange.valueOf(btn.getText()));
@@ -4460,6 +4482,7 @@ public class ImageDisplay extends JFrame {
 				}
 			});
 			btnNoLimit.addActionListener(new ActionListener()  {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JToggleButton btn = (JToggleButton) e.getSource();
 					imagePanel.setFilterRange(imageFilterRange.valueOf(btn.getText()));
@@ -4470,6 +4493,7 @@ public class ImageDisplay extends JFrame {
 			
 			JButton btnApply = new JButton("Apply Filter");
 			btnApply.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					imagePanel.setVal1(Double.valueOf(txtVal1.getText()));
 					imagePanel.setVal2(Double.valueOf(txtVal2.getText()));
@@ -4695,6 +4719,7 @@ public class ImageDisplay extends JFrame {
 			ButtonGroup paintMethod = new ButtonGroup();
 			btnPermanent = new JToggleButton("Permanent");
 			btnPermanent.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					imagePanel.setPermanentPaint(true);
 				}
@@ -4702,6 +4727,7 @@ public class ImageDisplay extends JFrame {
 			
 			btnOverlay = new JToggleButton("Temporary Overlay");
 			btnOverlay.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					imagePanel.setPermanentPaint(false);
 				}
@@ -4756,8 +4782,8 @@ public class ImageDisplay extends JFrame {
 			initTree();
 			JScrollPane scroll = new JScrollPane();
 			scroll.setViewportView(tree);
-			scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-			scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+			scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+			scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 			add(scroll);
 			JPanel pnlButtons = new JPanel();
 			pnlButtons.setLayout(new GridLayout(0, 2));
@@ -5876,18 +5902,21 @@ public class ImageDisplay extends JFrame {
 			JButton btnDelete = new JButton("Delete calibration file");
 			
 			btnSave.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					System.out.println("Button clicked: Save changes to calibration files.");
 				}
 			});
 			
 			btnHide.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					hideWindow();
 				}
 			});
 			
 			btnNew.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					System.out.println("Button clicked: Add new calibration file.");
 					
@@ -5895,6 +5924,7 @@ public class ImageDisplay extends JFrame {
 			});
 			
 			btnDelete.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					int row = table.getSelectedRow();
 					calibFiles.remove(row-1);
@@ -5924,6 +5954,7 @@ public class ImageDisplay extends JFrame {
 				final JToggleButton btn = new JToggleButton("" + i);
 				btns[i] = btn;
 				btns[i].addActionListener(new ActionListener() {
+					@Override
 					public void actionPerformed(ActionEvent e) {
 						int idx = Integer.valueOf(btn.getText());
 						curCalib = calibFiles.get(idx);
@@ -6098,6 +6129,7 @@ public class ImageDisplay extends JFrame {
 			
 			
 			btnThresh.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(btnThresh.isSelected()) {
 						txtThresh.setEnabled(true);
@@ -6112,6 +6144,7 @@ public class ImageDisplay extends JFrame {
 			});
 			
 			btnGreater.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(btnGreater.isSelected()) {
 						txtGreater.setEnabled(true);
@@ -6126,6 +6159,7 @@ public class ImageDisplay extends JFrame {
 			});
 			
 			btnLess.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(btnLess.isSelected()) {
 						txtLess.setEnabled(true);
@@ -6140,6 +6174,7 @@ public class ImageDisplay extends JFrame {
 			});
 			
 			btnBetween.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(btnBetween.isSelected()) {
 						txtBetweenMin.setEnabled(true);
@@ -6156,6 +6191,7 @@ public class ImageDisplay extends JFrame {
 			});
 			
 			btnEqual.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(btnEqual.isSelected()) {
 						txtEqual.setEnabled(true);
@@ -6170,6 +6206,7 @@ public class ImageDisplay extends JFrame {
 			});
 			
 			btnNotEqual.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(btnNotEqual.isSelected()) {
 						txtNotEqual.setEnabled(true);
@@ -6184,6 +6221,7 @@ public class ImageDisplay extends JFrame {
 			});
 			
 			btnCoalesce.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					if(btnCoalesce.isSelected()) {
 						txtCoalesce.setEnabled(true);
@@ -6343,6 +6381,7 @@ public class ImageDisplay extends JFrame {
 			btnRunSpotpicking.setFont(new Font(btnRunSpotpicking.getFont().getName(), Font.BOLD, 16));
 			btnRunSpotpicking.setForeground(Color.BLUE);
 			btnRunSpotpicking.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					Vector<Vector<Pixel>> activePix = imagePanel.getActivePixels();
 					if(activePix.get(0) != null && activePix.size() > 0) {
@@ -6583,7 +6622,7 @@ public class ImageDisplay extends JFrame {
 		private void initTabs() {
 			tabs = new JTabbedPane();
 			tabs.setTabLayoutPolicy(JTabbedPane.SCROLL_TAB_LAYOUT);
-			tabs.setTabPlacement(JTabbedPane.TOP);
+			tabs.setTabPlacement(SwingConstants.TOP);
 
 	        Border paneEdge = BorderFactory.createEmptyBorder(0,10,10,10);
 			JPanel pnlCalc = getCalculationTab();
@@ -6603,6 +6642,7 @@ public class ImageDisplay extends JFrame {
 			
 			box1 = new JComboBox<BraggReflection>();
 			box1.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					BraggReflection br = (BraggReflection) box1.getSelectedItem();
 //					br
@@ -6634,6 +6674,7 @@ public class ImageDisplay extends JFrame {
 			btnCalculate = new JButton("Calculate Bragg Reflections");
 			
 			btnCalculate.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					if(curCalib == null) {
 						JOptionPane.showMessageDialog(null, "No Calibration Selected.", 
@@ -6682,6 +6723,7 @@ public class ImageDisplay extends JFrame {
 			
 			JButton btnReadQValues = new JButton("Read Q values from file");
 			btnReadQValues.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JFileChooser chooser = new JFileChooser();
 					chooser.setDialogTitle("Select file containing Q values");
@@ -6735,6 +6777,7 @@ public class ImageDisplay extends JFrame {
 			txtQMax.setText(10 + "");
 			btnPlotQMax = new JButton("Plot maximum Q");
 			btnPlotQMax.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					double q = Double.valueOf(txtQMax.getText());
 					System.out.println("q = " + q);
@@ -6746,6 +6789,7 @@ public class ImageDisplay extends JFrame {
 
 			JButton btnPlotRings = new JButton("Plot Bragg rings");
 			btnPlotRings.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent arg0) {
 					for(int i = 0; i < calc.length; i++) {
 						BraggReflection br = calc[i];
@@ -6874,6 +6918,7 @@ public class ImageDisplay extends JFrame {
 			boxLattice = new JComboBox<BravaisLattice.LatticeType>(BravaisLattice.LatticeType.values());
 			
 			boxLattice.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					JComboBox<BravaisLattice.LatticeType> cb = (JComboBox<BravaisLattice.LatticeType>) e.getSource();
 					boolean[] isNeeded = BravaisLattice.LatticeType.isNeeded((BravaisLattice.LatticeType) cb.getSelectedItem());
@@ -6896,6 +6941,7 @@ public class ImageDisplay extends JFrame {
 			
 			btnLoadAtomsATD = new JButton("Load Atoms .atd file");
 			btnLoadAtomsATD.addActionListener(new ActionListener() {
+				@Override
 				public void actionPerformed(ActionEvent e) {
 					int returnVal = chooserMultiFile.showOpenDialog(null);
 					File f;

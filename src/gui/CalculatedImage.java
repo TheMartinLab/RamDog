@@ -100,8 +100,8 @@ public class CalculatedImage extends JPanel implements MouseMotionListener, Mous
 		
 	}
 	private Point viewCoordsToImageCoords(Point p) {
-		int newx1 = zoomX1 + (int) Math.rint(((double) zoomX2 - (double) zoomX1) / ((double)viewWidth) * (double) p.x);
-		int newy1 = zoomY1 + (int) Math.rint(((double) zoomY2 - (double) zoomY1) / ((double)viewHeight) * (double) p.y);
+		int newx1 = zoomX1 + (int) Math.rint(((double) zoomX2 - (double) zoomX1) / (viewWidth) * p.x);
+		int newy1 = zoomY1 + (int) Math.rint(((double) zoomY2 - (double) zoomY1) / (viewHeight) * p.y);
 		
 		return new Point(newx1, newy1);
 	}

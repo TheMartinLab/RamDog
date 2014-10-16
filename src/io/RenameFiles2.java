@@ -100,7 +100,7 @@ public class RenameFiles2 {
 	}
 	
 	private int charToIdx(char c) {
-		return (int) ((c-'a'));
+		return ((c-'a'));
 	}
 	private String getNewIdx(int curIdx, int maxIdx) {
 		String newIdx = String.valueOf(curIdx);

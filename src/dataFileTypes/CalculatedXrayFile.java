@@ -35,6 +35,7 @@ public class CalculatedXrayFile {
 	private int numFilesPerImage = 1;
 	private int numCalculationsPerFile = 1;
 	
+	@Override
 	public String toString() {
 		int maxLen = Math.min(25, file.getName().length());
 		return file.getName().substring(0, maxLen);
@@ -65,7 +66,7 @@ public class CalculatedXrayFile {
 					aProjection.add(vec);
 				}
 				if(aProjection.size() == 3) {
-					JVector[] arr = (JVector[]) aProjection.toArray(new JVector[aProjection.size()]);
+					JVector[] arr = aProjection.toArray(new JVector[aProjection.size()]);
 					projections.add(arr);
 					aProjection.clear();
 					numFilesPerImage++;

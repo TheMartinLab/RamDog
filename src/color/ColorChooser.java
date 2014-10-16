@@ -64,6 +64,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.WindowConstants;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import javax.swing.event.ListSelectionEvent;
@@ -146,8 +148,8 @@ public class ColorChooser extends JPanel
     
     public void initScrollPaneForTable() {
     	scrollPane = new JScrollPane(table);
-    	scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-    	scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+    	scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+    	scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
     }
     public Component getButtons() {
     	JButton btnUp = new JButton("Move Up");
@@ -344,7 +346,8 @@ public class ColorChooser extends JPanel
     private int getSelectedLevelIdx() {
     	return table.getSelectedRow();
     }
-    public void stateChanged(ChangeEvent e) {
+    @Override
+	public void stateChanged(ChangeEvent e) {
         int rowIdx = getSelectedLevelIdx();
         colors.remove(rowIdx);
         colors.add(rowIdx, jcc.getColor());
@@ -363,7 +366,7 @@ public class ColorChooser extends JPanel
         if(standAlone)
         	frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         else
-        	frame.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        	frame.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
 
         //Create and set up the content pane.
         ColorChooser chooser = new ColorChooser();
@@ -388,7 +391,8 @@ public class ColorChooser extends JPanel
         //Schedule a job for the event-dispatching thread:
         //creating and showing this application's GUI.
         javax.swing.SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
+            @Override
+			public void run() {
                 createAndShowGUI(true);
             }
         });
