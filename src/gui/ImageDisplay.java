@@ -2951,7 +2951,7 @@ public class ImageDisplay extends JFrame {
 			setHaveCalculated2ndDers(false);
 			image = null;
 			try {
-				this.image = ImageIO.read(imageFile);
+				image = ImageIO.read(imageFile);
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
