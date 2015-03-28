@@ -1066,9 +1066,7 @@ public class ImageDisplay extends JFrame {
 			showFiles.setVisible(true);
 		}
 		private void runHistory() {
-			if(imagePanel.curFileIdx >= imagePanel.filesInFolder.length) {
-				imagePanel.curFileIdx = 0;
-			}
+			imagePanel.curFileIdx = 0;
 			chooserMultiFile.setCurrentDirectory(imagePanel.filesInFolder[imagePanel.curFileIdx]);
 			int returnVal = chooserMultiFile.showSaveDialog(null);
 			switch(returnVal) {
